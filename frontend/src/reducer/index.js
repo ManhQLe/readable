@@ -5,7 +5,7 @@ import commentReducer from './commentReducer'
 
 
 function reducerCreator(reducerObj) {
-    return (state = InitState, action) => {
+    return (state = initialState, action) => {
         let newState = Object.assign({}, state);
         const keys = Object.keys(reducerObj);
 
