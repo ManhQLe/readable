@@ -1,5 +1,6 @@
 const clone = require('clone')
 const posts = require('./posts')
+const uuidv4 = require('uuid/v4')
 
 let db = {}
 
