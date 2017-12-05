@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import AppBar from 'material-ui/AppBar'
 import Category from './Category'
 
+
 import '../css/app.css'
 
 class App extends Component {

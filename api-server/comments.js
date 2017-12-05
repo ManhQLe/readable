@@ -58,10 +58,11 @@ function get (token, id) {
 function add (token, comment) {
   return new Promise((res) => {
     let comments = getData(token)
+    const id = uuidv4();
 
-    comments[comment.id] = {
-      id: comment.id,
-      timestamp: comment.timestamp,
+    comments[id] = {
+      id: id,
+      timestamp: Date.now(),
       body: comment.body,
       author: comment.author,
       parentId: comment.parentId,
@@ -71,7 +72,7 @@ function add (token, comment) {
     }
 
     posts.incrementCommentCounter(token, comment.parentId, 1)
-    res(comments[comment.id])
+    res(comments[id])
   })
 }
 
