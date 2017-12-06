@@ -42,9 +42,7 @@ app.get('/', (req, res) => {
       USAGE:
         Add a new post
 
-      PARAMS:
-        id - UUID should be fine, but any unique id will work
-        timestamp - timestamp in whatever format you like, you can use Date.now() if you like
+      PARAMS:        
         title - String
         body - String
         author - String
@@ -80,9 +78,7 @@ app.get('/', (req, res) => {
       USAGE:
         Add a comment to a post
 
-      PARAMS:
-        id: Any unique ID. As with posts, UUID is probably the best here.
-        timestamp: timestamp. Get this however you want.
+      PARAMS:        
         body: String
         author: String
         parentId: Should match a post id in the database.
