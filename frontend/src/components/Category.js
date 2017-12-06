@@ -3,14 +3,25 @@ import { connect } from 'react-redux'
 import Paper from 'material-ui/Paper';
 
 class Category extends Component {
-    
-    render(){
-        return <Paper style={{height:100}} fullWidth/>
+
+    render() {
+        const { categories } = this.props;
+
+        return <div>
+            {
+                categories.map(c => {
+                    <Paper style={{ height: 100 }} fullwidth="true" />
+                })
+            }
+        </div>
+
     }
 }
 
 function mapStateToProps(state) {
-    return {}
+    return {
+        categories: state.categories
+    }
 }
 
 
