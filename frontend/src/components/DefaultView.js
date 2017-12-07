@@ -2,8 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Paper from 'material-ui/Paper';
 
-class Category extends Component {
-
+class DefaultView extends Component {
+    
+	componentDidMount(){		
+        const {dispatch} = this.props;
+        dispatch()
+    }
+    
     render() {
         const { categories } = this.props;
 
@@ -27,4 +32,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps)(Category);
+export default connect(mapStateToProps)(DefaultView);
