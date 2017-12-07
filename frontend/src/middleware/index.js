@@ -4,9 +4,6 @@ import AppSettings from '../AppSettings'
 
 const service = new ApiService(AppSettings.getUrl(),AppSettings.TOKEN);
 
-function thening(){
-
-}
 
 export default serviceApi = store=>next=>action=>{
     switch(action.type){
