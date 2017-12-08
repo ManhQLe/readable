@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Paper from 'material-ui/Paper';
-import { updateCategories,updatePosts } from '../actions'
+import { mergeCategories,mergePosts } from '../actions'
 
 class DefaultView extends Component {
     
 	componentDidMount(){		
-        const {dispatch} = this.props;
-        
+        const {dispatch, apiService} = this.props;
+        apiService.getCategories()
+        .then(cats=>dispatch(mergeCategories(cats)));
     }
     
     render() {
@@ -28,7 +29,8 @@ class DefaultView extends Component {
 
 function mapStateToProps(state) {
     return {
-        categories: state.categories
+        categories: state.categories,
+        apiService: state.apiService
     }
 }
 

@@ -5,7 +5,7 @@ const state = {
     categories:[], 
     posts:[],
     comments:[],
-    apiService: new ApiService(AppSettings.getUrl(),AppSettings.TOKEN);
+    apiService: new ApiService(AppSettings.getUrl(),AppSettings.TOKEN)
 }
 
 

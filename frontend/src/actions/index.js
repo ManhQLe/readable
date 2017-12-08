@@ -1,24 +1,24 @@
-export const UPDATE_CATEGORIES = 'UPDATE_CATEGORIES'
-export const UPDATE_POSTS = 'UPDATE_POSTS'
-export const UPDATE_COMMENTS= 'UPDATE_COMMENTS'
+export const MERGE_CATEGORIES = 'MERGE_CATEGORIES'
+export const MERGE_POSTS = 'MERGE_POSTS'
+export const MERGE_COMMENTS= 'MERGE_COMMENTS'
 
-export function updateCategories(data){
+export function mergeCategories(data){
     return {
-        type:UPDATE_CATEGORIES,
+        type:MERGE_CATEGORIES,
         data
     }
 }
 
-export function updatePosts(data){
+export function mergePosts(data){
     return {
-        type:UPDATE_POSTS,
+        type:MERGE_POSTS,
         data
     }
 }
 
-export function updateComments(data){
+export function mergeComments(data){
     return{
-        type:UPDATE_COMMENTS,
+        type:MERGE_COMMENTS,
         data
     }
 }

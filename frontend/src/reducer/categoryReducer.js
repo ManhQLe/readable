@@ -1,10 +1,10 @@
-import actions from '../actions'
-
+import {MERGE_CATEGORIES} from '../actions'
+import {mergeWithNew} from './generic'
 export default function(categories,action){
     switch(action.type)
     {
-        case actions.GET_CATEGORIES:
-            return action.data;
+        case MERGE_CATEGORIES:                    
+            return mergeWithNew(categories,action.data,c=>c.path);
         default:
             return categories;
     }
