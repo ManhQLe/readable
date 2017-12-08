@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Paper from 'material-ui/Paper';
+import { updateCategories,updatePosts } from '../actions'
 
 class DefaultView extends Component {
     
 	componentDidMount(){		
         const {dispatch} = this.props;
-        dispatch()
+        
     }
     
     render() {

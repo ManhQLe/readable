@@ -1,24 +1,24 @@
-export const GET_CATEGORIES = 'GET_CATEGORIES'
-export const GET_POSTS = 'GET_POSTS'
-export const GET_POST_BY_CAT = 'GET_POST_BY_CAT'
+export const UPDATE_CATEGORIES = 'UPDATE_CATEGORIES'
+export const UPDATE_POSTS = 'UPDATE_POSTS'
+export const UPDATE_COMMENTS= 'UPDATE_COMMENTS'
 
-export function getCategories(){
+export function updateCategories(data){
     return {
-        type:GET_CATEGORIES
+        type:UPDATE_CATEGORIES,
+        data
     }
 }
 
-export function getPosts(){
+export function updatePosts(data){
     return {
-        type:GET_POSTS        
+        type:UPDATE_POSTS,
+        data
     }
 }
 
-export function getPostsByCatgory(category){
-    return {
-        type:GET_POST_BY_CAT,
-        category
+export function updateComments(data){
+    return{
+        type:UPDATE_COMMENTS,
+        data
     }
 }
-
-

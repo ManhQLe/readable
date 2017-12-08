@@ -8,9 +8,8 @@ import { Provider } from 'react-redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { BrowserRouter } from 'react-router-dom'
 import registerServiceWorker from './registerServiceWorker';
-import middleware from './middleware'
 
-const store = createStore(reducer,applyMiddleware(middleware));
+const store = createStore(reducer);
 
 ReactDOM.render(
     <MuiThemeProvider>
