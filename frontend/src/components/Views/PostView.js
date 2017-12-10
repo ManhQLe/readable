@@ -1,8 +1,11 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
+import Post from '../Post'
 class PostView extends Component{
     render(){
-        return <div>Post View</div>
+        return <div>
+            <Post post={{}}/>
+        </div>
     }
 }
 
