@@ -7,9 +7,10 @@ export default class ApiService {
 
     getCategories() {
         const url = `${this.url}/categories`;
-        return fetch(url,this.getOptions()).then(r => {
-            return r.json().categories;
+        return fetch(url,this.getOptions()).then(r => {            
+            return r.json()
         })
+        .then(json=>json.categories) 
     }
 
     /*************POSTS**************/
@@ -18,7 +19,7 @@ export default class ApiService {
         cat = cat && cat.length ? ('/' + cat) : '';
         const url = `${this.url}${cat}/posts`;
         let ajaxOptions = this.getOptions();
-        return fetch(url,ajaxOptions).then(r => r.json().categories)
+        return fetch(url,ajaxOptions).then(r => r.json())
     }
 
     getPost(id) {
