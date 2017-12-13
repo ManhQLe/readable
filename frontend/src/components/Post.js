@@ -11,18 +11,37 @@ class Post extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            Editting: false
+            editing: false
         }
     }
 
     render() {
         const { post } = this.props;
+        const { editing } = this.state;
+        
+        const postOrigin = <div>By <span>{post.author}</span> on <span>{post.timestamp}</span></div>
+        
+        let contentBlock;
+        if(editing)
+        {
+            contentBlock = <div>
+                <input value={this.title} defaultValue={this.title}/>
+                {postOrigin}
+                <textarea />
+            </div>
+        }
+        else
+            contentBlock = <div>               
+                <h2>{post.title}</h2>
+                    {postOrigin}
+                <p>
+                    {post.body}
+                </p>            
+            </div>
+
         return <Paper>
-            <h1>{post.title}</h1>
-            <p>
-                {post.body}
-            </p>
-            <Toolbar style={{backgroundColor:"white"}}>
+            {contentBlock}
+            <Toolbar style={{ backgroundColor: "white" }}>
                 <ToolbarGroup>
                     <ToolbarTitle text={`Vote Score:${post.voteScore}`} />
                     <IconButton tooltip="Up vote">

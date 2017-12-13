@@ -18,6 +18,7 @@ class App extends Component {
 		
 		apiService.getPosts()
 		.then(posts=>dispatch(mergePosts(posts)));
+
     }
 	render() {
 		return (

@@ -1,8 +1,29 @@
 import React, { Component } from 'react'
-import Paper from 'material-ui/Paper';
+import { connect } from 'react-redux'
 
-function Comment(props){
+import 
 
+class Comment extends Component{
+    constructor(props){
+        super(props)
+    }
+
+    render(){
+        const {comment} = this.props
+        return 
+        <div>
+        By <span>{comment.author}</span> on <span>{comment.timestamp}</span>
+        <p>            
+            comment.body
+        </p>
+        <span>{comment.voteScore}</span>
+        </div>
+    }
+}
+function mapStateToProps(state) {
+    return {
+        apiService: state.apiService
+    }
 }
 
-export default Comment;
+export default connect(mapStateToProps)(Comment);
