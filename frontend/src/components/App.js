@@ -5,19 +5,19 @@ import AppBar from 'material-ui/AppBar'
 import CategoryView from './Views/CategoryView'
 import DefaultView from './Views/DefaultView'
 import PostView from './Views/PostView'
-import { mergeCategories,mergePosts } from '../actions'
+import { mergeCategories,mergePosts,mergeAll } from '../actions'
 import '../css/app.css'
 
 class App extends Component {	
 	componentDidMount(){		
         const {dispatch, apiService} = this.props;
-        apiService.getCategories()
-        .then(cats=>{            
-            dispatch(mergeCategories(cats))
-		});
+		const ps=[apiService.getCategories(),apiService.getPosts()]
 		
-		apiService.getPosts()
-		.then(posts=>dispatch(mergePosts(posts)));
+		Promise.all(ps).then(([categories,posts])=>{
+			dispatch(mergeAll({categories,posts}));
+		}).catch(x=>{
+			console.log(x);
+		})
 
     }
 	render() {

@@ -1,11 +1,13 @@
-export function mergeWithNew(existingCol,newCol,idFx){
+export function mergeWithNew(existingCol, newCol, idFx, add = true) {
     const result = [];
-    const ids={};
-    newCol.forEach(e=> {
-        result.push(e);
+    const ids = {};
+    newCol.forEach(e => {
+        add && result.push(e);
         ids[idFx(e)] = e;
     });
 
-    existingCol.forEach(x=>!ids[idFx(x)]&&result.push(x));
+    existingCol.forEach(x =>{        
+        !ids[idFx(x)] && result.push(x)        
+    });
     return result;
 }
