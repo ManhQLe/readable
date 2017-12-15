@@ -18,8 +18,8 @@ class App extends Component {
 		}).catch(x=>{
 			console.log(x);
 		})
-
-    }
+	}
+	
 	render() {
 		return (
 			<div>				
