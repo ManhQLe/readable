@@ -11,6 +11,8 @@ const defaultData = {
     author: 'thingtwo',
     category: 'react',
     voteScore: 6,
+    mediaType:"video",
+    mediaUrl:"https://d125fmws0bore1.cloudfront.net/videos/video-bg-nd201.mp4",
     deleted: false,
     commentCount: 2
   },
@@ -21,6 +23,8 @@ const defaultData = {
     body: 'Just kidding. It takes more than 10 minutes to learn technology.',
     author: 'thingone',
     category: 'redux',
+    mediaType:"image",
+    mediaUrl:"https://raw.githubusercontent.com/reactjs/redux/master/logo/logo-title-dark.png",
     voteScore: -5,
     deleted: false,
     commentCount: 0
@@ -76,6 +80,8 @@ function add (token, post) {
       body: post.body,
       author: post.author,
       category: post.category,
+      mediaType:post.mediaType,
+      mediaUrl:post.mediaUrl,
       voteScore: 0,
       deleted: false,
       commentCount: 0

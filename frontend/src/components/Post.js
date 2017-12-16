@@ -37,42 +37,44 @@ class Post extends Component {
                     title={post.author}
                     subtitle=""
                 />
-                <CardMedia>
-                    <video width="100%"
-                    poster="https://d125fmws0bore1.cloudfront.net/assets/shared/video/video-bg-nd201-5a4a4886ed1bdbdd10f4278f4844eeda7e54f55a5d828d3b0160e36cab7ff7af.jpg" 
-                    autoplay="autoplay" loop="loop" class="video--responsive">
-                        <source src="https://d125fmws0bore1.cloudfront.net/videos/video-bg-nd201.mp4"/>
-                        <source src="https://d125fmws0bore1.cloudfront.net/videos/video-bg-nd201.ogv"/>
-                        <source src="https://d125fmws0bore1.cloudfront.net/videos/video-bg-nd201.webm"/>
-                    </video>                
+                <CardMedia overlay={<CardTitle title={post.title} subtitle="Overlay subtitle" />}>
+                    {   post.mediaType ==='video' &&
+                        <video width="100%" autoplay="autoplay" loop="loop">
+                            <source src={post.mediaUrl} />
+                        </video>
+                    }
+                    {
+                        post.mediaType ==='image' &&
+                        <img width="100%" src={post.mediaUrl}/>
+                    }
                 </CardMedia>
-                <CardTitle title={post.title} />
-                            <CardText>
-                                {post.body}
-                            </CardText>
-                            <CardActions>
-                                <IconButton tooltip="Up vote">
-                                    <FontIcon color={green400} className='material-icons'>thumb_up</FontIcon>
-                                </IconButton>
-                                <span>{post.voteScore}</span>
-                                <IconButton tooltip="Down vote">
-                                    <FontIcon color={red300} className='material-icons'>thumb_down</FontIcon>
-                                </IconButton>
-                                <IconButton tooltip="Edit">
-                                    <FontIcon className='material-icons' color={blue300}>edit</FontIcon>
-                                </IconButton>
-                                <IconButton tooltip="Delete">
-                                    <FontIcon className='material-icons' color={red300}>delete</FontIcon>
-                                </IconButton>
-                            </CardActions>
+
+                <CardText>
+                    {post.body}
+                </CardText>
+                <CardActions>
+                    <IconButton tooltip="Up vote">
+                        <FontIcon color={green400} className='material-icons'>thumb_up</FontIcon>
+                    </IconButton>
+                    <span>{post.voteScore}</span>
+                    <IconButton tooltip="Down vote">
+                        <FontIcon color={red300} className='material-icons'>thumb_down</FontIcon>
+                    </IconButton>
+                    <IconButton tooltip="Edit">
+                        <FontIcon className='material-icons' color={blue300}>edit</FontIcon>
+                    </IconButton>
+                    <IconButton tooltip="Delete">
+                        <FontIcon className='material-icons' color={red300}>delete</FontIcon>
+                    </IconButton>
+                </CardActions>
             </Card>
 
-                            return contentBlock
+        return contentBlock
     }
 }
 function mapStateToProps(state) {
     return {
-                                apiService: state.apiService
+        apiService: state.apiService
     }
 }
 
