@@ -5,10 +5,10 @@ let db = {}
 const defaultData = {
   "8xf0y6ziyjabvozdd253nd": {
     id: '8xf0y6ziyjabvozdd253nd',
-    timestamp: 1467166872634,
+    timestamp: 1513403153,
     title: 'Udacity is the best place to learn React',
     body: 'Everyone says so after all.',
-    author: 'thingtwo',
+    author: 'Manh Le',
     category: 'react',
     voteScore: 6,
     mediaType:"video",
@@ -18,13 +18,26 @@ const defaultData = {
   },
   "6ni6ok3ym7mf1p33lnez": {
     id: '6ni6ok3ym7mf1p33lnez',
-    timestamp: 1468479767190,
+    timestamp: 1513403153,
     title: 'Learn Redux in 10 minutes!',
     body: 'Just kidding. It takes more than 10 minutes to learn technology.',
-    author: 'thingone',
+    author: 'Manh Le',
     category: 'redux',
     mediaType:"image",
     mediaUrl:"https://raw.githubusercontent.com/reactjs/redux/master/logo/logo-title-dark.png",
+    voteScore: -5,
+    deleted: false,
+    commentCount: 0
+  },
+  "6ni6ok3ym7mf1p33lnxe": {
+    id: '6ni6ok3ym7mf1p33lzen',
+    timestamp: 1513403153,
+    title: 'React & Redux',
+    body: 'This is an introduction to react and redux.',
+    author: 'Manh Le',
+    category: 'redux',
+    mediaType:"image",
+    mediaUrl:"https://t3.ftcdn.net/jpg/01/04/48/60/240_F_104486058_zjCPDxg6tcBnsMM3fNQLDGvm8FGcBfb1.jpg",
     voteScore: -5,
     deleted: false,
     commentCount: 0
@@ -80,8 +93,8 @@ function add (token, post) {
       body: post.body,
       author: post.author,
       category: post.category,
-      mediaType:post.mediaType,
-      mediaUrl:post.mediaUrl,
+      mediaType:post.mediaType&& post.mediaType!==''?post.mediaType:'image',
+      mediaUrl:post.mediaType&& post.mediaUrl!==''?post.mediaType:'http://www.mulierchile.com/brown-background/brown-background-006.jpg',
       voteScore: 0,
       deleted: false,
       commentCount: 0
