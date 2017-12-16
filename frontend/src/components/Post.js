@@ -4,7 +4,10 @@ import Paper from 'material-ui/Paper';
 import Badge from 'material-ui/Badge';
 import IconButton from 'material-ui/IconButton'
 import FontIcon from 'material-ui/FontIcon';
+import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux'
+
+import {Alizarin, SunFlower, Emerald,PeterRiver,Turquoise} from './colors'
 
 import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
@@ -12,7 +15,7 @@ import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'm
 function PostOrigin(props){
     const {post} = props;
     return <div>
-        <span style={{color:"#f1c40f"}}>{moment.unix(post.timestamp).format("dddd, MMMM Do YYYY")}</span> by <span>{post.author}</span>
+        <span style={{color:SunFlower}}>{moment.unix(post.timestamp).format("dddd, MMMM Do YYYY")}</span> by <span style={{color:Emerald}}>{post.author}</span>
     </div>
 }
 
@@ -56,16 +59,14 @@ class Post extends Component {
                     <IconButton tooltip="Up vote">
                         <FontIcon className='material-icons'>thumb_up</FontIcon>
                     </IconButton>
-                    <span>{post.voteScore}</span>
+                    <FontIcon>{post.voteScore}</FontIcon>
                     <IconButton tooltip="Down vote">
                         <FontIcon className='material-icons'>thumb_down</FontIcon>
                     </IconButton>
-                    <IconButton tooltip="Edit">
-                        <FontIcon className='material-icons'>edit</FontIcon>
-                    </IconButton>
-                    <IconButton tooltip="Delete">
-                        <FontIcon className='material-icons'>delete</FontIcon>
-                    </IconButton>
+                    
+                    <RaisedButton label="Edit" icon={<FontIcon color={PeterRiver} className='material-icons'>edit</FontIcon>}/>
+                    <RaisedButton label="Delete" icon={<FontIcon color={Alizarin} className='material-icons'>delete</FontIcon>} />
+                                            
                 </CardActions>
             </Card>
 
