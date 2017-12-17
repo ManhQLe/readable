@@ -23,7 +23,9 @@ class App extends Component {
 	render() {
 		return (
 			<div>				
-				<AppBar style={{position:"fixed"}} title={"Readable Home"} showMenuIconButton={false}/>				
+				<AppBar style={{position:"fixed"}} title={"Readable Home"} showMenuIconButton={false}>				
+					<span>Test</span>
+				</AppBar>
 				<div className="app-body">
 					<Route exact path='/' component={DefaultView} />	
 					<Route exact path='/:category' component={CategoryView}/>

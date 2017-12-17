@@ -14,8 +14,9 @@ class DefaultView extends Component {
                     <Divider/>
                     {
                         posts.filter(p=>p.category === c.path).map(p =>
-                            <Post key={p.id} post={p} />
+                            <div style={{marginBottom:".5em"}}><Post key={p.id} post={p} /></div>
                         )
+                        
                     }
                 </div>                
                 )

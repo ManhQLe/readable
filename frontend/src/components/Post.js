@@ -7,15 +7,15 @@ import FontIcon from 'material-ui/FontIcon';
 import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux'
 
-import {Alizarin, SunFlower, Emerald,PeterRiver,Turquoise} from './colors'
+import { Alizarin, SunFlower, Emerald, PeterRiver, Turquoise } from './colors'
 
 import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 
-function PostOrigin(props){
-    const {post} = props;
+function PostOrigin(props) {
+    const { post } = props;
     return <div>
-        <span style={{color:SunFlower}}>{moment.unix(post.timestamp).format("dddd, MMMM Do YYYY")}</span> by <span style={{color:Emerald}}>{post.author}</span>
+        <span style={{ color: SunFlower }}>{moment.unix(post.timestamp).format("dddd, MMMM Do YYYY")}</span> by <span style={{ color: Emerald }}>{post.author}</span>
     </div>
 }
 
@@ -29,26 +29,26 @@ class Post extends Component {
 
     render() {
         const { post } = this.props;
-        const { editing } = this.state;        
+        const { editing } = this.state;
 
         let contentBlock;
         if (editing) {
             contentBlock = <div>
-                <input value={this.title} defaultValue={this.title} /> 
+                <input value={this.title} defaultValue={this.title} />
                 <textarea />
             </div>
         }
         else
-            contentBlock = <Card>                
-                <CardMedia overlay={<CardTitle title={post.title} subtitle={<PostOrigin post={post}/>} />}>
-                    {   post.mediaType ==='video' &&
+            contentBlock = <Card>
+                <CardMedia overlay={<CardTitle title={post.title} subtitle={<PostOrigin post={post} />} />}>
+                    {post.mediaType === 'video' &&
                         <video width="100%" autoplay="autoplay" loop="loop">
                             <source src={post.mediaUrl} />
                         </video>
                     }
                     {
-                        post.mediaType ==='image' &&
-                        <img width="100%" src={post.mediaUrl}/>
+                        post.mediaType === 'image' &&
+                        <img width="100%" src={post.mediaUrl} />
                     }
                 </CardMedia>
 
@@ -56,17 +56,21 @@ class Post extends Component {
                     {post.body}
                 </CardText>
                 <CardActions>
-                    <IconButton tooltip="Up vote">
-                        <FontIcon className='material-icons'>thumb_up</FontIcon>
-                    </IconButton>
-                    <FontIcon>{post.voteScore}</FontIcon>
-                    <IconButton tooltip="Down vote">
-                        <FontIcon className='material-icons'>thumb_down</FontIcon>
-                    </IconButton>
-                    
-                    <RaisedButton label="Edit" icon={<FontIcon color={PeterRiver} className='material-icons'>edit</FontIcon>}/>
-                    <RaisedButton label="Delete" icon={<FontIcon color={Alizarin} className='material-icons'>delete</FontIcon>} />
-                                            
+                    <ul className="grid">
+                        <li>
+                            <IconButton tooltip="Up vote">
+                                <FontIcon color={Emerald} className='material-icons'>thumb_up</FontIcon>
+                            </IconButton>
+                            <FontIcon>{post.voteScore}</FontIcon>
+                            <IconButton tooltip="Down vote">
+                                <FontIcon color={Alizarin} className='material-icons'>thumb_down</FontIcon>
+                            </IconButton>
+                        </li>
+                        <li style={{justifyContent:"flex-end"}}>
+                            <RaisedButton label="Edit" icon={<FontIcon color={PeterRiver} className='material-icons'>edit</FontIcon>} />
+                            <RaisedButton label="Delete" icon={<FontIcon color={Alizarin} className='material-icons'>delete</FontIcon>} />
+                        </li>
+                    </ul>
                 </CardActions>
             </Card>
 
