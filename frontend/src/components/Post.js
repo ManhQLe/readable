@@ -7,10 +7,10 @@ import FontIcon from 'material-ui/FontIcon';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux'
+import EditToolbar from './EditToolbar'
 
 import {Clouds, Alizarin,Carrot, SunFlower, Emerald, PeterRiver, Turquoise } from './colors'
 
-import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 
 function PostOrigin(props) {
@@ -33,10 +33,12 @@ class Post extends Component {
             return { editing: !prev.editing }
         })
     }
-
-    editClicked = () => {
-        console.log("Clicked")
-        this.toggleEdit();
+    toolbarActed=(act)=>{
+        switch(act){
+            case "EDIT":
+                this.toggleEdit();
+                break;
+        }
     }
 
     render() {
@@ -84,21 +86,7 @@ class Post extends Component {
             {contentBlock}
 
             <CardActions>
-                <ul className="grid">
-                    <li>
-                        <IconButton tooltip="Up vote">
-                            <FontIcon color={Emerald} className='material-icons'>thumb_up</FontIcon>
-                        </IconButton>
-                        <FontIcon>{post.voteScore}</FontIcon>
-                        <IconButton tooltip="Down vote">
-                            <FontIcon color={Alizarin} className='material-icons'>thumb_down</FontIcon>
-                        </IconButton>
-                    </li>
-                    <li style={{ justifyContent: "flex-end" }}>
-                        {!editing && <RaisedButton label="Edit" onClick={this.editClicked} icon={<FontIcon color={PeterRiver} className='material-icons'>edit</FontIcon>} />}
-                        <RaisedButton disabled={editing} label="Delete" icon={<FontIcon color={Alizarin} className='material-icons'>delete</FontIcon>} />
-                    </li>
-                </ul>
+                <EditToolbar voteScore={post.voteScore} onAction={this.toolbarActed} editing={editing}/>
             </CardActions>
         </Card>
     }
