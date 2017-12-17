@@ -9,12 +9,12 @@ class DefaultView extends Component {
         const { categories, posts } = this.props;
         return <div>
             {
-                categories.map(c => <div>
-                    <Category key={c.path} category={c} />
+                categories.map(c => <div key={c.path}>
+                    <Category category={c} />
                     <Divider/>
                     {
                         posts.filter(p=>p.category === c.path).map(p =>
-                            <div style={{marginBottom:".5em"}}><Post key={p.id} post={p} /></div>
+                            <div key={p.id} style={{marginBottom:".5em"}}><Post post={p} /></div>
                         )
                         
                     }
