@@ -4,6 +4,7 @@ import Paper from 'material-ui/Paper';
 import Category from '../Category'
 import Post from '../Post'
 import Divider from 'material-ui/Divider';
+import SortToolbar from '../SortToolbar'
 class DefaultView extends Component {
     render() {
         const { categories, posts } = this.props;
@@ -11,7 +12,8 @@ class DefaultView extends Component {
             {
                 categories.map(c => <div key={c.path}>
                     <Category category={c} />
-                    <Divider/>
+                    <SortToolbar/>
+                    <Divider/>                    
                     {
                         posts.filter(p=>p.category === c.path).map(p =>
                             <div key={p.id} style={{marginBottom:".5em"}}><Post post={p} /></div>
