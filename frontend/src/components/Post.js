@@ -20,6 +20,10 @@ function PostOrigin(props) {
     </div>
 }
 
+function htmlizedBody(body){
+    return body.replace(/\n/g,"<br/>")
+}
+
 class Post extends Component {
     constructor(props) {
         super(props);
@@ -36,8 +40,14 @@ class Post extends Component {
     toolbarActed=(act)=>{
         switch(act){
             case "EDIT":
+            case "CANCEL":
                 this.toggleEdit();
                 break;
+            case "SAVE":
+                break;
+            case "THUMBSUP":
+            case "THUMBSDOWN":
+                break;            
         }
     }
 
@@ -65,9 +75,7 @@ class Post extends Component {
         }
         else{
             titleBlock= post.title;
-            contentBlock = <CardText>
-                {post.body}
-            </CardText>
+            contentBlock = <CardText dangerouslySetInnerHTML={{__html:htmlizedBody(post.body)}}></CardText>
         }
 
         return <Card>

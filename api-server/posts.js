@@ -11,8 +11,8 @@ const defaultData = {
     author: 'Manh Le',
     category: 'react',
     voteScore: 6,
-    mediaType:"video",
-    mediaUrl:"https://d125fmws0bore1.cloudfront.net/videos/video-bg-nd201.mp4",
+    mediaType:"image",
+    mediaUrl:"https://d125fmws0bore1.cloudfront.net/assets/pages/ndop/nd019/video-bg-nd019-c0fe54fcae4dd7c967a4e4f9fa63c06356fd57034c0b72377fa557d24a18bbef.jpg",
     deleted: false,
     commentCount: 2
   },
