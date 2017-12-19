@@ -4,12 +4,13 @@ import IconButton from 'material-ui/IconButton'
 import FontIcon from 'material-ui/FontIcon';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Alizarin, Carrot, SunFlower, Emerald,Silver } from './colors'
+import PropTypes from 'prop-types';
 
 const RaisedButtonStyle={
     marginLeft:".4em"
 }
 
-export default function EditToolbar(props) {
+function EditToolbar(props) {
     const {
         voteScore = 0,
         editing = false,
@@ -57,3 +58,11 @@ export default function EditToolbar(props) {
         </li>
     </ul>
 }
+
+EditToolbar.propTypes = {
+    voteScore: PropTypes.number,
+    editing: PropTypes.bool,
+    onAction: PropTypes.func
+}
+
+export default EditToolbar;

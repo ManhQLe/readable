@@ -10,6 +10,11 @@ import DateIcon from 'material-ui/svg-icons/action/date-range'
 import NumericIcon from 'material-ui/svg-icons/editor/format-list-numbered'
 
 export default function SortToolbar(props){
+
+    function onMenuSelected(){
+
+    }
+
     return <IconMenu
         anchorOrigin={{horizontal: 'left', vertical: 'top'}}
         targetOrigin={{horizontal: 'left', vertical: 'top'}}
@@ -17,13 +22,13 @@ export default function SortToolbar(props){
             <SortIcon/>
         </IconButton>}
     >
-        <MenuItem primaryText="Sort by Title"
+        <MenuItem onClick={()=>onMenuSelected("Title")} primaryText="Sort by Title"
                 leftIcon={<AZIcon/>}
         />
-         <MenuItem primaryText="Sort by Date"
+         <MenuItem onClick={()=>onMenuSelected("Date")} primaryText="Sort by Date"
                 leftIcon={<DateIcon/>}
         />
-         <MenuItem primaryText="Sort by vote score"
+         <MenuItem onClick={()=>onMenuSelected("Score")} primaryText="Sort by vote score"
                 leftIcon={<NumericIcon/>}
         />        
     </IconMenu>
