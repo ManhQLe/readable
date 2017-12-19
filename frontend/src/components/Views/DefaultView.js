@@ -6,13 +6,22 @@ import Post from '../Post'
 import Divider from 'material-ui/Divider';
 import SortToolbar from '../SortToolbar'
 class DefaultView extends Component {
+    constructor(props){
+        super(props)
+        this.state={
+            sortBy: ''
+        }
+    }
+
+
     render() {
+        const {sortBy} = this.state;
         const { categories, posts } = this.props;
         return <div>
             {
                 categories.map(c => <div key={c.path}>
                     <Category category={c} />
-                    <SortToolbar/>
+                    <SortToolbar sortBy={sortBy}/>
                     <Divider/>                    
                     {
                         posts.filter(p=>p.category === c.path).map(p =>
