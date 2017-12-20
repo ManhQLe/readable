@@ -1,29 +1,22 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
 import Post from '../Post'
+import {Alizarin} from '../colors'
+import Category from '../Category';
 const UrlPattern = require('url-pattern');
 
 class CategoryView extends Component{
     render(){
         const {categories,posts}  = this.props;
-
         const pat = new UrlPattern("/:category");
         const keys = pat.match(window.location.pathname)            
         const cat = categories.find(c=>c.path === keys.category);
         let renderBlock
-        if(cat) {
-            const relatedPosts = posts.filter(p=>p.category === cat.path);
-            renderBlock = <div>
-            <h1>{cat.name}</h1>
-            <div>
-                {
-                    relatedPosts.map(p=><Post key={p.id} post={p}/>)
-                }
-            </div>
-        </div>
+        {
+            renderBlock = cat? <Category category={cat}/>
+            :
+            <div></div>
         }
-        else
-            renderBlock=<div></div>
        
         return renderBlock;
     }
@@ -32,7 +25,6 @@ class CategoryView extends Component{
 function mapStateToProps(state) {
     return {
         categories: state.categories,
-        posts: state.posts,
         apiService: state.apiService
     }
 }

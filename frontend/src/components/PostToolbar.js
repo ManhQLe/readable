@@ -10,7 +10,7 @@ const RaisedButtonStyle={
     marginLeft:".4em"
 }
 
-function EditToolbar(props) {
+function PostToolbar(props) {
     const {
         voteScore = 0,
         editing = false,
@@ -24,11 +24,11 @@ function EditToolbar(props) {
 
     return <ul className="grid">
         <li>
-            <IconButton tooltip="Up vote" onClick={()=>this.handleAction("THUMBSUP")} >
+            <IconButton tooltip="Up vote" onClick={()=>handleAction("THUMBSUP")} >
                 <FontIcon color={Emerald} className='material-icons'>thumb_up</FontIcon>
             </IconButton>
             <FontIcon>{voteScore}</FontIcon>
-            <IconButton tooltip="Down vote" onClick={()=>this.handleAction("THUMBSDOWN")}>
+            <IconButton tooltip="Down vote" onClick={()=>handleAction("THUMBSDOWN")}>
                 <FontIcon color={Alizarin} className='material-icons'>thumb_down</FontIcon>
             </IconButton>
         </li>
@@ -59,10 +59,10 @@ function EditToolbar(props) {
     </ul>
 }
 
-EditToolbar.propTypes = {
+PostToolbar.propTypes = {
     voteScore: PropTypes.number,
     editing: PropTypes.bool,
     onAction: PropTypes.func
 }
 
-export default EditToolbar;
+export default PostToolbar;

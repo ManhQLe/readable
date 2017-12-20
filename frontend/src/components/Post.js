@@ -7,7 +7,8 @@ import FontIcon from 'material-ui/FontIcon';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux'
-import EditToolbar from './EditToolbar'
+import PostToolbar from './PostToolbar'
+import { mergePosts } from '../actions'
 
 import {Clouds, Alizarin,Carrot, SunFlower, Emerald, PeterRiver, Turquoise } from './colors'
 
@@ -38,6 +39,7 @@ class Post extends Component {
         })
     }
     toolbarActed=(act)=>{
+        const {dispatch, apiService,post} = this.props;
         switch(act){
             case "EDIT":
             case "CANCEL":
@@ -46,7 +48,16 @@ class Post extends Component {
             case "SAVE":
                 break;
             case "THUMBSUP":
+                apiService.votePost(post.id,true)
+                .then(p=>{
+                    dispatch(mergePosts({posts:[p]}));
+                })            
+                break;
             case "THUMBSDOWN":
+                apiService.votePost(post.id,false)
+                .then(p=>{
+                    dispatch(mergePosts({posts:[p]}));
+                })  
                 break;            
         }
     }
@@ -94,7 +105,7 @@ class Post extends Component {
             {contentBlock}
 
             <CardActions>
-                <EditToolbar voteScore={post.voteScore} onAction={this.toolbarActed} editing={editing}/>
+                <PostToolbar voteScore={post.voteScore} onAction={this.toolbarActed} editing={editing}/>
             </CardActions>
         </Card>
     }

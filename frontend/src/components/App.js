@@ -9,7 +9,7 @@ import { mergeCategories,mergePosts,mergeAll } from '../actions'
 import '../css/app.css'
 
 class App extends Component {	
-	componentDidMount(){		
+	componentDidMount(){				
         const {dispatch, apiService} = this.props;
 		const ps=[apiService.getCategories(),apiService.getPosts()]
 		
@@ -23,8 +23,8 @@ class App extends Component {
 	render() {
 		return (
 			<div>				
-				<AppBar style={{position:"fixed"}} title={"Readable Home"} showMenuIconButton={false}>				
-					<span>Test</span>
+				<AppBar style={{position:"fixed"}} title={<span>Readable Home</span>}
+				showMenuIconButton={false}>				
 				</AppBar>
 				<div className="app-body">
 					<Route exact path='/' component={DefaultView} />	
