@@ -30,15 +30,15 @@ const defaultData = {
     commentCount: 0
   },
   "6ni6ok3ym7mf1p33lnxe": {
-    id: '6ni6ok3ym7mf1p33lzen',
-    timestamp: 1513403153,
-    title: 'React & Redux',
+    id: '6ni6ok3ym7mf1p33lnxe',
+    timestamp: 1513730380,
+    title: 'Getting started with React & Redux',
     body: 'This is an introduction to react and redux.',
     author: 'Manh Le',
     category: 'redux',
     mediaType:"image",
     mediaUrl:"https://t3.ftcdn.net/jpg/01/04/48/60/240_F_104486058_zjCPDxg6tcBnsMM3fNQLDGvm8FGcBfb1.jpg",
-    voteScore: -5,
+    voteScore: 2,
     deleted: false,
     commentCount: 0
   }

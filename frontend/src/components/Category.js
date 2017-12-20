@@ -5,6 +5,17 @@ import Divider from 'material-ui/Divider';
 import Post from './Post'
 import SortToolbar from './SortToolbar'
 
+const sortByTitle=(p1,p2)=>{
+    return p1.title.localeCompare(p2.title)
+}
+const sortByScore=(p1,p2)=>{
+    return p1.voteScore - p2.voteScore;
+}
+const sortByDate=(p1,p2)=>{
+    return p1.timestamp - p2.timestamp;
+}
+
+
 
 class Category extends Component {
     constructor(props) {
@@ -22,19 +33,32 @@ class Category extends Component {
         const {sortBy} = this.state;
         const { category } = this.props;        
         const posts = this.props.posts.filter(p=>p.category === category.path);
+        let sortfx;
+        switch(sortBy){
+            case SortToolbar.BYDATE:
+                sortfx = sortByDate;
+                break;
+            case SortToolbar.BYTITLE:
+                sortfx = sortByTitle;
+                break;
+            case SortToolbar.BYSCORE:
+                sortfx = sortByScore;
+                break;
+        }
 
+        sortfx && posts.sort(sortfx);
         
         return <div>
-            <ul class='grid'>
+            <ul className='grid'>
                 <li>
                     <h1 style={{ display: "inline-block",margin:0 }}>{category.name}</h1>
                 </li>
                 <li style={{justifyContent:"flex-end"}}>
                     <SortToolbar sortBy={sortBy} onSortCommand={this.sortCommand}/>
-                </li>
-            
-            </ul>
+                </li>            
+            </ul>            
             <Divider/>
+            <br/>
             {
                 posts.map(p =>
                     <div key={p.id} style={{marginBottom:".5em"}}><Post post={p} /></div>
