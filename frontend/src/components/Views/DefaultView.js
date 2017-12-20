@@ -10,7 +10,7 @@ class DefaultView extends Component {
 
     render() {        
         const { categories, posts } = this.props;
-        return <div>
+        return <div>            
             {
                 categories.map(c =><Category category={c} key={c.path}/>)
             }
