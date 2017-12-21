@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch,withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import AppBar from './AppBar'
 import CategoryView from './Views/CategoryView'
@@ -45,4 +45,4 @@ function mapStateToProps(state) {
 	}
 }
 
-export default connect(mapStateToProps)(App)
+export default withRouter(connect(mapStateToProps)(App))

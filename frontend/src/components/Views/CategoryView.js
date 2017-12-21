@@ -6,8 +6,6 @@ import Category from '../Category';
 
 const UrlPattern = require('url-pattern');
 
-
-
 class CategoryView extends Component{
     render(){
         const {categories,posts}  = this.props;

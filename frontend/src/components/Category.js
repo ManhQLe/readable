@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import {Link,withRouter} from 'react-router-dom'
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 import Post from './Post'
@@ -51,9 +52,9 @@ class Category extends Component {
         return <div>
             <ul className='grid'>
                 <li>
-                    <a href={`/${category.path}`}>
+                    <Link to={`/${category.path}`}>
                         <h1 style={{ display: "inline-block",margin:0 }}>{category.name}</h1>
-                    </a>
+                    </Link>
                 </li>
                 <li style={{justifyContent:"flex-end"}}>
                     <SortToolbar sortBy={sortBy} onSortCommand={this.sortCommand}/>
