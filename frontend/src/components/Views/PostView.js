@@ -7,6 +7,7 @@ import Post from '../Post'
 import Comment from '../Comment'
 const UrlPattern = require('url-pattern');
 
+
 class PostView extends Component{
     constructor(props){
         super(props);        

@@ -3,7 +3,10 @@ import {connect} from 'react-redux'
 import Post from '../Post'
 import {Alizarin} from '../colors'
 import Category from '../Category';
+
 const UrlPattern = require('url-pattern');
+
+
 
 class CategoryView extends Component{
     render(){
