@@ -17,33 +17,26 @@ export default class AppBar extends Component {
         const pat = new UrlPattern("/:category/:postId");        
         const pat2 = new UrlPattern("/:category"); 
         const keys = pat.match(window.location.pathname)
-        ||pat2.match(window.location.pathname) 
+        || pat2.match(window.location.pathname) 
         || {}
         
-        const { category, postId } = keys;
+        const { category } = keys;
         const hasCat = category && category.length;
-        const hasPost = postId && postId.length;
         let link;
 
-        const showBack = hasCat || hasPost;
+        const breadCrums= [
+            <Link to="/"><HomeIcon color="white"/></Link>
+        ];
 
-        if (hasCat && hasPost) {
-            link = "/" + category
-        }
-        else
-            link = "/";
+        hasCat && breadCrums.push("<",<Link to={'/'+ category}  
+        style={{ alignItems: 'center', display: "flex",alignItems:'center'}} >
+            <BackArrowIcon color="white" hoverColor={Orange} />
+        </Link>)
 
 
-        const pageTitle = <div style={{ display: "flex" }}>
-            
-            {
-                showBack && <Link to={link}  
-                style={{ alignItems: 'center', display: "flex",marginRight:'.3em'}} >
-                    <BackArrowIcon color="white" hoverColor={Orange} />
-                </Link>
-            }
- 
-            <span style={{ display: "inline-block" }}>Readable Home</span>
+        const pageTitle = <div style={{ display: "flex" }}>            
+            {breadCrums}
+
         </div>
 
         return <MAppBar style={{ position: "fixed" }} title={pageTitle}
