@@ -6,7 +6,7 @@ export default function(posts,action){
         case MERGE_POSTS:
             return mergeWithNew(posts,action.data.posts,p=>p.id);
         case MERGE_ALL:
-            return mergeWithNew(posts,action.data.posts||[],p=>p.path);
+            return mergeWithNew(posts,action.data.posts||[],p=>p.id);
         default:
         return posts
     }

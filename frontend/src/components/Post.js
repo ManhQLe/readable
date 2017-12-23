@@ -6,6 +6,7 @@ import IconButton from 'material-ui/IconButton'
 import FontIcon from 'material-ui/FontIcon';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 import PostToolbar from './PostToolbar'
 import { mergePosts } from '../actions'
@@ -85,11 +86,11 @@ class Post extends Component {
             /></CardText>
         }
         else{
-            titleBlock= post.title;
+            titleBlock= <Link to={`/${post.category}/${post.id}`}>{post.title}</Link>
             contentBlock = <CardText dangerouslySetInnerHTML={{__html:htmlizedBody(post.body)}}></CardText>
         }
 
-        return <Card>
+        return <Card>            
             <CardMedia overlay={<CardTitle title={titleBlock} subtitle={<PostOrigin post={post} />} />}>
                 {post.mediaType === 'video' &&
                     <video width="100%" autoPlay="autoplay" loop="loop">

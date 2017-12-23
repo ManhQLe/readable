@@ -3,8 +3,9 @@ import { Orange } from './colors'
 import MAppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton';
 import { Link } from 'react-router-dom'
-import BackArrowIcon from 'material-ui/svg-icons/navigation/arrow-back'
+
 import HomeIcon from 'material-ui/svg-icons/action/home'
+import ArrowRight from  'material-ui/svg-icons/hardware/keyboard-arrow-right'
 const UrlPattern = require('url-pattern');
 
 export default class AppBar extends Component {
@@ -20,21 +21,26 @@ export default class AppBar extends Component {
         || pat2.match(window.location.pathname) 
         || {}
         
-        const { category } = keys;
-        const hasCat = category && category.length;
+        const {category, postId } = keys;
+        const hasPost = postId && postId.length;
         let link;
 
         const breadCrums= [
-            <Link to="/"><HomeIcon color="white"/></Link>
+            <span>
+                <Link to="/"><HomeIcon color="white"/></Link>
+            </span>
         ];
 
-        hasCat && breadCrums.push("<",<Link to={'/'+ category}  
-        style={{ alignItems: 'center', display: "flex",alignItems:'center'}} >
-            <BackArrowIcon color="white" hoverColor={Orange} />
-        </Link>)
+        hasPost && breadCrums.push(
+            <span><ArrowRight color="white"/></span>,
+            <span><Link to={'/'+ category}>
+                {category}
+            </Link>
+            </span>
+        )
 
 
-        const pageTitle = <div style={{ display: "flex" }}>            
+        const pageTitle = <div className="barGrid">            
             {breadCrums}
 
         </div>

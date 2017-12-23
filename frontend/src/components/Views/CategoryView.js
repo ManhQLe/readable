@@ -4,14 +4,13 @@ import Post from '../Post'
 import {Alizarin} from '../colors'
 import Category from '../Category';
 import Page404 from './Page404'
-const UrlPattern = require('url-pattern');
 
 class CategoryView extends Component{
     render(){
-        const {categories,apiService}  = this.props;
-        const pat = new UrlPattern("/:category");
-        const keys = pat.match(window.location.pathname)
-        const cat = categories.find(c=>c.path === keys.category);
+        const {categories ,apiService,match}  = this.props;
+        
+        
+        const cat = categories.find(c=>c.path === match.params.category);
 
 
         let renderBlock        

@@ -5,8 +5,8 @@ import CircularProgress from 'material-ui/CircularProgress';
 import {mergePosts,mergeAll} from '../../actions'
 import Post from '../Post'
 import Comment from '../Comment'
-const UrlPattern = require('url-pattern');
 
+import UrlPattern from 'url-pattern'
 
 class PostView extends Component{
     constructor(props){
@@ -26,21 +26,23 @@ class PostView extends Component{
     componentDidMount(){
         const pat = new UrlPattern("/:category/:postId");
         const keys = pat.match(window.location.pathname);
-        const {posts,apiService,dispatch} = this.props;
+        const {posts,apiService,dispatch,comments} = this.props;
         const post = posts.find(p=>p.id===keys.id && p.category === keys.category);        
         ((post && Promise.resolve(post)) || apiService.getPost(keys.postId))
         .then(post=>{
             if(!post || !post.id || post.category!== keys.category)
                 this.setState({postStatus:2})
-            
-            apiService.getComments(keys.postId)
-            .then(comments=>{
-                dispatch(mergeAll({
-                    posts:[post],
-                    comments
-                }))
-                this.setState({postStatus:1})
-            })
+            else
+            {                
+                apiService.getPostComments(keys.postId)
+                .then(comments=>{
+                    dispatch(mergeAll({
+                        posts:[post],
+                        comments
+                    }))
+                    this.setState({postStatus:1})
+                })
+            }
         })
         .catch(ex=>{
             console.log(ex)
@@ -50,7 +52,9 @@ class PostView extends Component{
     }
 
     render(){        
-        const {postStatus} = this.props;
+        const {postStatus} = this.state;
+        const {posts,comments,match} = this.props;
+        
         let body;
         switch(postStatus){
             case 0:
@@ -59,11 +63,9 @@ class PostView extends Component{
                 </div>
                 break;
             case 1:
-                const {posts,comments} = this.props;
-                const pat = new UrlPattern("/:category/:postId");
-                const keys = pat.match(window.location.pathname)
-                const post = posts.find(p=>p.id===keys.postId)
-                const relComments = comments.filter(c=>c.parentId === keys.postId);
+
+                const post = posts.find(p=>p.id===match.params.postId)
+                const relComments = comments.filter(c=>c.parentId === match.params.postId);
                 body=<div>
                     <Post post={post}/>
                     {

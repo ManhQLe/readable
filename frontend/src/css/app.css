@@ -26,3 +26,22 @@
 .h1-thin {
     font-weight: 300;
 }
+
+.barGrid{
+     display:flex;
+    flex-wrap: wrap;
+}
+
+.barGrid > span{
+    display: flex;
+    align-items: center
+}
+
+a{
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover{
+    color:"red"
+}
