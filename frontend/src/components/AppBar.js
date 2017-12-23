@@ -25,18 +25,15 @@ export default class AppBar extends Component {
         const hasPost = postId && postId.length;
         let link;
 
-        const breadCrums= [
-            <span>
-                <Link to="/"><HomeIcon color="white"/></Link>
-            </span>
+        const breadCrums= [       
+            <Link key="1" to="/"><HomeIcon color="white"/></Link>
         ];
 
         hasPost && breadCrums.push(
-            <span><ArrowRight color="white"/></span>,
-            <span><Link to={'/'+ category}>
+            <a key="2"><ArrowRight color="white"/></a>,
+            <Link key="3" to={'/'+ category}>
                 {category}
-            </Link>
-            </span>
+            </Link>            
         )
 
 

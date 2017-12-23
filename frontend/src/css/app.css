@@ -28,11 +28,11 @@
 }
 
 .barGrid{
-     display:flex;
+    display:flex;
     flex-wrap: wrap;
 }
 
-.barGrid > span{
+.barGrid > a{
     display: flex;
     align-items: center
 }

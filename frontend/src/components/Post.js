@@ -10,6 +10,8 @@ import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 import PostToolbar from './PostToolbar'
 import { mergePosts } from '../actions'
+import PropTypes from 'prop-types'
+
 
 import {Clouds, Alizarin,Carrot, SunFlower, Emerald, PeterRiver, Turquoise } from './colors'
 
@@ -111,6 +113,12 @@ class Post extends Component {
         </Card>
     }
 }
+
+
+Post.propTypes={
+    post:PropTypes.object.isRequired
+}
+
 function mapStateToProps(state) {
     return {
         apiService: state.apiService
