@@ -26,7 +26,7 @@ export default class AppBar extends Component {
         let link;
 
         const breadCrums= [       
-            <Link key="1" to="/"><HomeIcon color="white"/></Link>
+            <Link key="1" to="/">Readable&nbsp; <HomeIcon color="white"/></Link>
         ];
 
         hasPost && breadCrums.push(

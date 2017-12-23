@@ -22,7 +22,7 @@ class Category extends Component {
     constructor(props) {
         super(props);
         this.state={
-            sortBy: ''
+            sortBy: SortToolbar.BYTITLE
         }
     }
 

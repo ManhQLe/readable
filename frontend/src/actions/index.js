@@ -1,35 +1,23 @@
-export const MERGE_CATEGORIES = 'MERGE_CATEGORIES'
-export const MERGE_POSTS = 'MERGE_POSTS'
-export const MERGE_COMMENTS= 'MERGE_COMMENTS'
-export const MERGE_ALL = 'MERGE_ALL'
-
-
-export function mergeCategories(data){
-    return {
-        type:MERGE_CATEGORIES,
-        data
-    }
-}
+export const MERGE_DATA = 'MERGE_DATA'
 
 export function mergeAll(data){
     return {
-        type:MERGE_ALL,
+        type:MERGE_DATA,
         data
     }
 }
 
-export function mergePosts(data){
-    return {
-        type:MERGE_POSTS,
-        data
-    }
+export function mergeCategories(categories){
+    return mergeAll({data:{categories}});
 }
 
-export function mergeComments(data){
-    return{
-        type:MERGE_COMMENTS,
-        data
-    }
+
+export function mergePosts(posts){
+    return mergeAll({data:{posts}});
+}
+
+export function mergeComments(comments){
+    return mergeAll({data:{comments}})
 }
 
 

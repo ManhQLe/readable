@@ -10,7 +10,7 @@ const RaisedButtonStyle={
     marginLeft:".4em"
 }
 
-function PostToolbar(props) {
+function EditToolbar(props) {
     const {
         voteScore = 0,
         editing = false,
@@ -59,10 +59,10 @@ function PostToolbar(props) {
     </ul>
 }
 
-PostToolbar.propTypes = {
+EditToolbar.propTypes = {
     voteScore: PropTypes.number,
     editing: PropTypes.bool,
     onAction: PropTypes.func
 }
 
-export default PostToolbar;
+export default EditToolbar;

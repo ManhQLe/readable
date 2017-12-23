@@ -8,7 +8,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
-import PostToolbar from './PostToolbar'
+import EditToolbar from './EditToolbar'
 import { mergePosts } from '../actions'
 import PropTypes from 'prop-types'
 
@@ -108,7 +108,7 @@ class Post extends Component {
             {contentBlock}
 
             <CardActions>
-                <PostToolbar voteScore={post.voteScore} onAction={this.toolbarActed} editing={editing}/>
+                <EditToolbar voteScore={post.voteScore} onAction={this.toolbarActed} editing={editing}/>
             </CardActions>
         </Card>
     }

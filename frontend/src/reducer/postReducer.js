@@ -1,11 +1,9 @@
 import {mergeWithNew} from './generic'
-import {MERGE_POSTS,MERGE_ALL} from '../actions'
+import {MERGE_DATA} from '../actions'
 
 export default function(posts,action){
     switch(action.type){
-        case MERGE_POSTS:
-            return mergeWithNew(posts,action.data.posts,p=>p.id);
-        case MERGE_ALL:
+        case MERGE_DATA:
             return mergeWithNew(posts,action.data.posts||[],p=>p.id);
         default:
         return posts
