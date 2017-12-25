@@ -1,7 +1,9 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
+import {BelizeHole, Turquoise} from '../colors'
 import Paper from 'material-ui/Paper'
 import CircularProgress from 'material-ui/CircularProgress';
+import Divider from 'material-ui/Divider'
 import {mergeComments} from '../../actions'
 import Post from '../Post'
 import Comment from '../Comment'
@@ -10,28 +12,20 @@ import Page404 from './Page404'
 class PostView extends Component{
     constructor(props){
         super(props);
-        this.state={
-            fetch:true
-        }
+
     }
 
-    componentDidMount(){
-        
-        const {posts,comments,match,apiService,dispatch} = this.props
-        const {postId} = match.params;
-        const post = posts.find(p=>p.id === postId) || {};
-                
-        !comments.length && apiService.getPostComments(post.id)
-        .then(comments=>{
-            this.setState(s=>{fetch:true})
-            dispatch(mergeComments(comments))
-        })
-    }
 
     render(){
         const {posts,comments,match,apiService,dispatch} = this.props
-        const {cateory,postId} = match.params;        
-        const post = posts.find(p=>p.id === postId);
+        const {postId} = match.params;
+        const post = posts.find(p=>p.id === postId)
+                
+        post && !comments.length && apiService.getPostComments(post.id)
+        .then(cms=>{
+            if(cms.length)
+                dispatch(mergeComments(cms))
+        })
       
 
         if(post)
@@ -40,9 +34,15 @@ class PostView extends Component{
 
             return <div>                            
                 <Post post={post}/>
-                <h1>Comments</h1>
+                <h1 className="h1-thin" style={{color:Turquoise}}>Comments</h1>
                 {
-                fcomments.map((c,i)=><Comment comment={c}/>)
+                    fcomments.map((c,i)=>{
+                        return <div key={c.id} > 
+                            <Comment comment={c}/>                            
+                            <Divider/>
+                            <br/>
+                        </div>
+                    })
                 }
             </div>
 

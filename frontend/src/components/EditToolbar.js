@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
-import Badge from 'material-ui/Badge';
+import React from 'react'
 import IconButton from 'material-ui/IconButton'
 import FontIcon from 'material-ui/FontIcon';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Alizarin, Carrot, SunFlower, Emerald,Silver } from './colors'
+import { Alizarin, SunFlower, Emerald,Silver } from './colors'
 import PropTypes from 'prop-types';
 
 const RaisedButtonStyle={

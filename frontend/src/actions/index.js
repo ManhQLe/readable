@@ -8,16 +8,16 @@ export function mergeAll(data){
 }
 
 export function mergeCategories(categories){
-    return mergeAll({data:{categories}});
+    return mergeAll({categories});
 }
 
 
 export function mergePosts(posts){
-    return mergeAll({data:{posts}});
+    return mergeAll({posts});
 }
 
 export function mergeComments(comments){
-    return mergeAll({data:{comments}})
+    return mergeAll({comments})
 }
 
 
