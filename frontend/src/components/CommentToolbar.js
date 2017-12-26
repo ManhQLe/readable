@@ -15,14 +15,14 @@ const styles={
 }
 
 export default function CommentToobar (props){
-    const {comment,onAction} = props
+    const {comment,onAction,editing} = props
     const {voteScore} = comment;
 
     function handleAction(type){
         onAction(type)
     }
-
     return (
+
         <ul className="grid">
         <li>
             <IconButton iconStyle={styles.smallIcon} tooltip="Up vote" onClick={()=>handleAction("THUMBSUP")} >
@@ -32,6 +32,20 @@ export default function CommentToobar (props){
             <IconButton iconStyle={styles.smallIcon} tooltip="Down vote" onClick={()=>handleAction("THUMBSDOWN")}>
                 <Thumbsdown color={Abestos} hoverColor={SunFlower}/>
             </IconButton>
+        </li>
+        <li>
+            {
+                editing && <FlatButton label="Save" onClick={() => handleAction("SAVE")} labelColor={Emerald}/>
+            }
+            {
+                editing && <FlatButton label="Cancel" onClick={() => handleAction("CANCEL")} labelColor={SunFlower}/>
+            }
+
+            <FlatButton disabled={editing} 
+                onClick={()=>handleAction("DELETE")} 
+                label="Delete" 
+            />         
+            
         </li>
         </ul>
     )
