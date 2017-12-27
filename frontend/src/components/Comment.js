@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Silver,Carrot, BelizeHole,Clouds } from './colors'
+import Snackbar from 'material-ui/Snackbar';
 import TextField from 'material-ui/TextField';
 import moment from 'moment'
 import Divider from 'material-ui/Divider';
@@ -9,8 +10,11 @@ class Comment extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            editing: false
+            editing: false,
+            commMessage: null,
         }
+        this.edited = false;
+        this.modContent = null;
     }
 
     toggleEdit = () => {
@@ -25,26 +29,45 @@ class Comment extends Component {
             case "CANCEL":
                 this.toggleEdit();
                 break;
+            case "SAVE":      
+            this.props.comment.body = this.modContent;    
+            this.communicateMessage("Saved")    
+
+                this.toggleEdit();     
         }
     }
+    communicateMessage=(m)=>{
+        this.setState({commMessage:m})
+    }
 
+    onBodyChanged=(e)=>{
+        this.modContent = e.target.value;
+    }
 
+    snackbarClosed = ()=>{
+        this.communicateMessage(null);
+    }
 
     render() {
         const { comment } = this.props
-        const { editing } = this.state;
-
-        let body;
+        const { editing,commMessage } = this.state;
+        const open = commMessage!==null && commMessage.length!==0
+        const content =this.modContent || comment.body;
+        let body;        
         body = editing?<TextField id={comment.id+'Body'} multiLine={true}
         rows={5}
         rowsMax = {8}
         underlineStyle={{borderColor:BelizeHole}}
         underlineFocusStyle={{borderColor:Carrot}}
         fullWidth={true}
-        defaultValue={comment.body}
-        ref={i=>i&&i.focus()}
+        defaultValue={content}
+        onChange={this.onBodyChanged}
+        ref={i=>{
+            this.input = i;
+            i&&i.focus()
+        }}
     />
-        : <p>{comment.body}</p>
+        : <p>{content}</p>
 
         return (
             <div>
@@ -57,6 +80,11 @@ class Comment extends Component {
                 </div>
                 { body}
                 <CommentToolbar comment={comment} onAction={this.acted} editing={editing} />
+                <Snackbar open={open}
+                message={commMessage}
+                autoHideDuration={3000}
+                onRequestClose={this.snackbarClosed}
+                />
             </div>
         )
     }
