@@ -1,8 +1,11 @@
 import React,{Component} from 'react'
-import { Pumpkin, Carrot, SunFlower, Abestos ,Silver } from './colors'
+import { Pumpkin,Emerald, Carrot, Alizarin, Abestos ,Silver } from './colors'
 import IconButton from 'material-ui/IconButton'
 import Thumbsup from 'material-ui/svg-icons/action/thumb-up'
 import Thumbsdown from 'material-ui/svg-icons/action/thumb-down'
+import Cancel from 'material-ui/svg-icons/navigation/cancel'
+import Save from 'material-ui/svg-icons/content/save'
+import Edit from 'material-ui/svg-icons/image/edit'
 import FlatButton from 'material-ui/FlatButton';
 
 
@@ -26,24 +29,43 @@ export default function CommentToobar (props){
         <ul className="grid">
         <li>
             <IconButton iconStyle={styles.smallIcon} tooltip="Up vote" onClick={()=>handleAction("THUMBSUP")} >
-                <Thumbsup color={Abestos} hoverColor={SunFlower}/>
+                <Thumbsup color={Abestos} hoverColor={Emerald}/>
             </IconButton>
             <span>{voteScore}</span>
             <IconButton iconStyle={styles.smallIcon} tooltip="Down vote" onClick={()=>handleAction("THUMBSDOWN")}>
-                <Thumbsdown color={Abestos} hoverColor={SunFlower}/>
+                <Thumbsdown color={Abestos} hoverColor={Emerald}/>
             </IconButton>
         </li>
-        <li>
+        <li style={{ justifyContent: "flex-end" }}>
             {
-                editing && <FlatButton label="Save" onClick={() => handleAction("SAVE")} labelColor={Emerald}/>
+                !editing && <IconButton 
+                iconStyle={styles.smallIcon}
+                label="Edit" 
+                onClick={() => handleAction("EDIT")}>
+                    <Edit />
+                </IconButton>
             }
             {
-                editing && <FlatButton label="Cancel" onClick={() => handleAction("CANCEL")} labelColor={SunFlower}/>
+                editing && <IconButton 
+                    label="Save" 
+                    onClick={() => handleAction("SAVE")}
+                    iconStyle={styles.smallIcon}
+                >
+                    <Save/>
+                </IconButton>
+            }
+            {
+                editing && <IconButton 
+                    iconStyle={styles.smallIcon}                
+                    label="Cancel" 
+                    onClick={() => handleAction("CANCEL")}>
+                    <Cancel color={Alizarin}/>
+                </IconButton>
             }
 
             <FlatButton disabled={editing} 
                 onClick={()=>handleAction("DELETE")} 
-                label="Delete" 
+                label="Delete" labelStyle={{color:Pumpkin}}
             />         
             
         </li>

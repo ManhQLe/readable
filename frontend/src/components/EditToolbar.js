@@ -4,6 +4,7 @@ import FontIcon from 'material-ui/FontIcon';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Alizarin, SunFlower, Emerald,Silver } from './colors'
 import PropTypes from 'prop-types';
+import edit from 'material-ui/svg-icons/image/edit';
 
 const RaisedButtonStyle={
     marginLeft:".4em"
@@ -20,6 +21,7 @@ function EditToolbar(props) {
     const handleAction = (actionType) => {
         onAction(actionType);
     }
+    console.log(editing)
 
     return <ul className="grid">
         <li>
