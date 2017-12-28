@@ -51,16 +51,11 @@ class Post extends Component {
             case "SAVE":
                 break;
             case "THUMBSUP":
-                apiService.votePost(post.id,true)
+            case "THUMBSDOWN":            
+                apiService.votePost(post.id,act==="THUMBSUP")
                 .then(p=>{
-                    dispatch(mergePosts({posts:[p]}));
+                    dispatch(mergePosts([p]));
                 })            
-                break;
-            case "THUMBSDOWN":
-                apiService.votePost(post.id,false)
-                .then(p=>{
-                    dispatch(mergePosts({posts:[p]}));
-                })  
                 break;            
         }
     }

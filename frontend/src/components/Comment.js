@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import {mergeComments} from '../actions'
 import { Silver,Carrot, BelizeHole,Clouds } from './colors'
 import Snackbar from 'material-ui/Snackbar';
 import TextField from 'material-ui/TextField';
@@ -11,7 +12,7 @@ class Comment extends Component {
         super(props)
         this.state = {
             editing: false,
-            commMessage: null,
+            commMessage: "",
         }
         this.edited = false;
         this.modContent = null;
@@ -23,17 +24,35 @@ class Comment extends Component {
         })
     }
 
-    acted=(type)=> {
-        switch (type) {
+    acted=(act)=> {
+        const {apiService,comment,dispatch} = this.props;
+        switch (act) {
             case "EDIT":
             case "CANCEL":
                 this.toggleEdit();
                 break;
             case "SAVE":      
-            this.props.comment.body = this.modContent;    
-            this.communicateMessage("Saved")    
+                //this.props.comment.body = this.modContent;    
+               
+                const modContent = this.modContent;
 
-                this.toggleEdit();     
+                modContent && apiService.editComment(comment.id,modContent)
+                .then(c=>{                    
+                    this.communicateMessage("Saved")    
+                    this.toggleEdit();
+                    dispatch(mergeComments([c]))
+                })
+                .catch((e)=>{
+                    this.communicateMessage(e);
+                })
+            case "THUMBSUP":
+            case "THUMBSDOWN":
+                apiService.voteComment(comment.id,act==="THUMBSUP")
+                .then(c=>{
+                    dispatch(mergeComments([c]));
+                })            
+                break;            
+                
         }
     }
     communicateMessage=(m)=>{
@@ -45,13 +64,13 @@ class Comment extends Component {
     }
 
     snackbarClosed = ()=>{
-        this.communicateMessage(null);
+        this.communicateMessage("");
     }
 
     render() {
         const { comment } = this.props
         const { editing,commMessage } = this.state;
-        const open = commMessage!==null && commMessage.length!==0
+        const open = commMessage.length>0;
         const content =this.modContent || comment.body;
         let body;        
         body = editing?<TextField id={comment.id+'Body'} multiLine={true}
@@ -67,7 +86,7 @@ class Comment extends Component {
             i&&i.focus()
         }}
     />
-        : <p>{content}</p>
+        : <p dangerouslySetInnerHTML={{__html:content.replace(/\n/g,"<br/>")}}></p>
 
         return (
             <div>

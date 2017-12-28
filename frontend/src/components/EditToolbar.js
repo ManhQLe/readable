@@ -21,7 +21,7 @@ function EditToolbar(props) {
     const handleAction = (actionType) => {
         onAction(actionType);
     }
-    console.log(editing)
+
 
     return <ul className="grid">
         <li>
