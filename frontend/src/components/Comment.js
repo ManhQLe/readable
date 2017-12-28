@@ -4,7 +4,6 @@ import moment from 'moment'
 
 import Snackbar from 'material-ui/Snackbar';
 import TextField from 'material-ui/TextField';
-import Dialog from 'material-ui/Dialog';
 import Divider from 'material-ui/Divider';
 
 import {mergeComments} from '../actions'
