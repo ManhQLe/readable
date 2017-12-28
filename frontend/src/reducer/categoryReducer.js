@@ -4,7 +4,7 @@ export default function(categories,action){
     switch(action.type)
     {        
         case MERGE_DATA:
-            return mergeWithNew(categories,action.data.categories||[],c=>c.path);
+            return mergeWithNew(categories,action.data.categories||[],c=>c.path,action.add);
         default:
             return categories;
     }

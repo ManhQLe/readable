@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {mergeComments} from '../actions'
-import { Silver,Carrot, BelizeHole,Clouds } from './colors'
+import moment from 'moment'
+
 import Snackbar from 'material-ui/Snackbar';
 import TextField from 'material-ui/TextField';
-import moment from 'moment'
+import Dialog from 'material-ui/Dialog';
 import Divider from 'material-ui/Divider';
+
+import {mergeComments} from '../actions'
+import { Silver,Carrot, BelizeHole,Clouds } from './colors'
 import CommentToolbar from './CommentToolbar'
+
+
 class Comment extends Component {
     constructor(props) {
         super(props)
@@ -32,7 +37,6 @@ class Comment extends Component {
                 this.toggleEdit();
                 break;
             case "SAVE":      
-                //this.props.comment.body = this.modContent;    
                
                 const modContent = this.modContent;
 
@@ -45,13 +49,19 @@ class Comment extends Component {
                 .catch((e)=>{
                     this.communicateMessage(e);
                 })
+                break;
             case "THUMBSUP":
             case "THUMBSDOWN":
                 apiService.voteComment(comment.id,act==="THUMBSUP")
                 .then(c=>{
                     dispatch(mergeComments([c]));
                 })            
-                break;            
+                break;
+            case "DELETE":
+                apiService.delComment(comment.id)
+                .then(c=>{
+                    dispatch(mergeComments([c],false))
+                })
                 
         }
     }
