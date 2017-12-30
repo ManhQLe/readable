@@ -12,7 +12,7 @@ export default function DelComfirmation(props) {
     const actions = [
         <FlatButton
           label="Cancel"
-          primary={true}
+          secondary={true}
           onClick={()=>handleClose("CANCEL")}
         />,
         <FlatButton

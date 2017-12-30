@@ -19,10 +19,9 @@ class EditToolbar extends Component {
         }
     }
 
-
-
     handleConfirmation = (act) => {
-        
+        this.setState({open:false})
+        act==="OK" && this.props.onAction("DELETE");
     }
 
     render() {
@@ -33,7 +32,7 @@ class EditToolbar extends Component {
         } = this.props;
 
         return <ul className="grid">
-            <DelConfirmation onAction={this.handleConfirmation} open={this.state.open} />
+            <DelConfirmation message="Are you sure to delete this post?" onAction={this.handleConfirmation} open={this.state.open} />
             <li>
                 <IconButton tooltip="Up vote" onClick={() => onAction("THUMBSUP")} >
                     <FontIcon color={Emerald} className='material-icons'>thumb_up</FontIcon>
@@ -62,7 +61,7 @@ class EditToolbar extends Component {
 
                 <RaisedButton disabled={editing}
                     style={RaisedButtonStyle}
-                    onClick={() => onAction("DELETE")}
+                    onClick={() => this.setState({open:true})}
                     label="Delete"
                     icon={<FontIcon style={{ color: (editing ? Silver : Alizarin) }} className='material-icons'>delete</FontIcon>}
                 />
