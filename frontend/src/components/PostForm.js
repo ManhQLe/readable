@@ -7,7 +7,6 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import PropTypes, { number } from 'prop-types'
 
-
 class PostForm extends Component{
 
     constructor(props){

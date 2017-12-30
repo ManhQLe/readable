@@ -88,8 +88,7 @@ class Comment extends Component {
         fullWidth={true}
         defaultValue={content}
         onChange={this.onBodyChanged}
-        ref={i=>{
-            this.input = i;
+        ref={i=>{            
             i&&i.focus()
         }}
     />

@@ -80,6 +80,7 @@ class Post extends Component {
                 underlineFocusStyle={{borderColor:Carrot}}
                 fullWidth={true}
                 defaultValue={post.body}
+                ref={i=>i&&i.focus()}
             /></CardText>
         }
         else{
