@@ -1,10 +1,11 @@
 import React from 'react'
 import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton'
 
 export default function DelComfirmation(props) {
-    const {message,open,onAction}
+    const {message,open,onAction} = props;
 
-    handleClose=(act)=>{
+    const handleClose = (act)=>{
         onAction(act)
     }
 
@@ -12,12 +13,12 @@ export default function DelComfirmation(props) {
         <FlatButton
           label="Cancel"
           primary={true}
-          onClick={()=>this.handleClose("CANCEL")}
+          onClick={()=>handleClose("CANCEL")}
         />,
         <FlatButton
           label="OK"
           primary={true}
-          onClick={()=>this.handleClose("OK")}
+          onClick={()=>handleClose("OK")}
         />,
       ];
     

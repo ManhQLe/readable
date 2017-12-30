@@ -7,7 +7,7 @@ import Cancel from 'material-ui/svg-icons/navigation/cancel'
 import Save from 'material-ui/svg-icons/content/save'
 import Edit from 'material-ui/svg-icons/image/edit'
 import FlatButton from 'material-ui/FlatButton';
-
+import DelConfirmation from './DelConfirmation'
 
 const styles={
     smallIcon: {
@@ -17,58 +17,70 @@ const styles={
     iconHoverColor:"red"
 }
 
-export default function CommentToobar (props){
-    const {comment,onAction,editing} = props
-    const {voteScore} = comment;
+export default class CommentToobar extends Component{
 
-    function handleAction(type){
-        onAction(type)
+    constructor(props){
+        super(props)
+        this.state = {
+            open: false
+        }
     }
-    return (
 
-        <ul className="grid">
-        <li>
-            <IconButton iconStyle={styles.smallIcon} tooltip="Up vote" onClick={()=>handleAction("THUMBSUP")} >
-                <Thumbsup color={Abestos} hoverColor={Emerald}/>
-            </IconButton>
-            <span>{voteScore}</span>
-            <IconButton iconStyle={styles.smallIcon} tooltip="Down vote" onClick={()=>handleAction("THUMBSDOWN")}>
-                <Thumbsdown color={Abestos} hoverColor={Emerald}/>
-            </IconButton>
-        </li>
-        <li style={{ justifyContent: "flex-end" }}>
-            {
-                !editing && <IconButton 
-                iconStyle={styles.smallIcon}
-                label="Edit" 
-                onClick={() => handleAction("EDIT")}>
-                    <Edit />
+    handleAction(type){
+        this.props.onAction(type)
+    }
+
+    render(){
+        const {comment,editing} = this.props
+        const {voteScore} = comment;
+        return (
+
+            <ul className="grid">
+            <li>
+                <IconButton iconStyle={styles.smallIcon} tooltip="Up vote" onClick={()=>this.handleAction("THUMBSUP")} >
+                    <Thumbsup color={Abestos} hoverColor={Emerald}/>
                 </IconButton>
-            }
-            {
-                editing && <IconButton 
-                    label="Save" 
-                    onClick={() => handleAction("SAVE")}
+                <span>{voteScore}</span>
+                <IconButton iconStyle={styles.smallIcon} tooltip="Down vote" onClick={()=>this.handleAction("THUMBSDOWN")}>
+                    <Thumbsdown color={Abestos} hoverColor={Emerald}/>
+                </IconButton>
+            </li>
+            <li style={{ justifyContent: "flex-end" }}>
+                {
+                    !editing && <IconButton 
                     iconStyle={styles.smallIcon}
-                >
-                    <Save/>
-                </IconButton>
-            }
-            {
-                editing && <IconButton 
-                    iconStyle={styles.smallIcon}                
-                    label="Cancel" 
-                    onClick={() => handleAction("CANCEL")}>
-                    <Cancel color={Alizarin}/>
-                </IconButton>
-            }
+                    label="Edit" 
+                    onClick={() => this.handleAction("EDIT")}>
+                        <Edit />
+                    </IconButton>
+                }
+                {
+                    editing && <IconButton 
+                        label="Save" 
+                        onClick={() => this.handleAction("SAVE")}
+                        iconStyle={styles.smallIcon}
+                    >
+                        <Save/>
+                    </IconButton>
+                }
+                {
+                    editing && <IconButton 
+                        iconStyle={styles.smallIcon}                
+                        label="Cancel" 
+                        onClick={() => this.handleAction("CANCEL")}>
+                        <Cancel color={Alizarin}/>
+                    </IconButton>
+                }
+    
+                <FlatButton disabled={editing} 
+                    onClick={()=>this.handleAction("DELETE")} 
+                    label="Delete" labelStyle={{color:Pumpkin, disabledColor:"white"}}
+                />         
+                
+            </li>
+            </ul>
+        )
+    }
 
-            <FlatButton disabled={editing} 
-                onClick={()=>handleAction("DELETE")} 
-                label="Delete" labelStyle={{color:Pumpkin}}
-            />         
-            
-        </li>
-        </ul>
-    )
+   
 }
