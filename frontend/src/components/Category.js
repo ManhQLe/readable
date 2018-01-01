@@ -9,14 +9,14 @@ import AZIcon from 'material-ui/svg-icons/av/sort-by-alpha'
 import DateIcon from 'material-ui/svg-icons/action/date-range'
 import NumericIcon from 'material-ui/svg-icons/editor/format-list-numbered'
 
-const sortByTitle=(p1,p2)=>{
-    return p1.title.localeCompare(p2.title)
+const sortByTitle=(p1,p2,asc)=>{
+    return (asc?1:-1) * p1.title.localeCompare(p2.title)
 }
-const sortByScore=(p1,p2)=>{
-    return p1.voteScore - p2.voteScore;
+const sortByScore=(p1,p2,asc)=>{
+    return (asc?1:-1) *(p1.voteScore - p2.voteScore);
 }
-const sortByDate=(p1,p2)=>{
-    return p1.timestamp - p2.timestamp;
+const sortByDate=(p1,p2,asc)=>{
+    return (asc?1:-1) *(p1.timestamp - p2.timestamp);
 }
 
 const sortCommands = [
@@ -31,22 +31,22 @@ class Category extends Component {
     constructor(props) {
         super(props);
         this.state={
-            sortBy: "BYTITLE"
+            sortBy: "BYTITLE",
+            asc:true,
         }
     }
 
-    sortCommand=(by)=>{
-        this.setState({sortBy:by})
+    sortCommand=(by,asc)=>{
+        this.setState({sortBy:by,asc})
     }
 
     render() {
-        const {sortBy} = this.state;
+        const {sortBy,asc} = this.state;
         const { category } = this.props;        
         const posts = this.props.posts.filter(p=>p.category === category.path);
         let sortfx = sortCommands.find(x=>x.command===sortBy);
         
-
-        sortfx && posts.sort(sortfx.fx);
+        sortfx && posts.sort((a,b)=>sortfx.fx(a,b,asc));
         
         return <div>
             <ul className='grid'>
@@ -56,7 +56,7 @@ class Category extends Component {
                     </Link>
                 </li>
                 <li style={{justifyContent:"flex-end"}}>
-                    <SortToolbar sortBy={sortBy} sortCommands={sortCommands} onSortCommand={this.sortCommand}/>
+                    <SortToolbar sortBy={sortBy} asc={asc} sortCommands={sortCommands} onSortCommand={this.sortCommand}/>
                 </li>            
             </ul>            
             <Divider/>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import FontIcon from 'material-ui/FontIcon'
 import IconMenu from 'material-ui/IconMenu';
+import FlatButton from 'material-ui/FlatButton';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import { Alizarin, Carrot, SunFlower, Emerald, PeterRiver } from './colors'
@@ -13,28 +13,35 @@ import PropTypes from 'prop-types';
 class SortToolbar extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            asc: true
-        }
     }
 
+    onSortChanged = (v) => {
+        const { onSortCommand = () => { } } = this.props;
+        onSortCommand(v, true);
+    }
+
+    onDirectionChanged = (v) => {
+        const {asc, onSortCommand = () => { } } = this.props;
+        const sdir = !asc;
+        onSortCommand(v, sdir);
+
+    }
 
     render() {
-        const { sortBy = null, sortCommands, onSortCommand = () => { } } = this.props
-
+        const { sortBy = null, sortCommands,asc } = this.props        
         const c = sortCommands.find(x => x.command === sortBy)
 
 
         return <div style={{ display: "inline-flex", alignItems: "center" }}>
             <IconMenu
-                onChange={(e, v) => onSortCommand(v)}
+                onChange={(e, v) => this.onSortChanged(v)}
                 anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
                 targetOrigin={{ horizontal: 'left', vertical: 'top' }}
                 iconStyle={{
                     color: Carrot
                 }}
                 iconButtonElement={<IconButton>
-                    {   (c && c.icon) || 
+                    {(c && c.icon) ||
                         <SortIcon />
                     }
                 </IconButton>}
@@ -47,7 +54,19 @@ class SortToolbar extends Component {
                     })
                 }
             </IconMenu>
-            <span>{(c && c.title) || ""}</span>
+            <FlatButton onClick={() => this.onDirectionChanged(c.command)}>
+                {
+                    (
+                        c &&
+                        <span> {c.title} &nbsp;
+                            <i className={asc ? "fa fa-long-arrow-down" : "fa fa-long-arrow-up"}
+                                style={{color:PeterRiver}}
+                                aria-hidden="true"></i>
+                        </span>
+                    )
+                    || ""
+                }
+            </FlatButton>
         </div>
     }
 }
