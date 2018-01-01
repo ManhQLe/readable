@@ -3,6 +3,7 @@ import moment from 'moment'
 import Paper from 'material-ui/Paper';
 import Badge from 'material-ui/Badge';
 import IconButton from 'material-ui/IconButton'
+import Snackbar from 'material-ui/Snackbar';
 import FontIcon from 'material-ui/FontIcon';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
@@ -32,8 +33,23 @@ class Post extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            editing: false
+            editing: false,
+            commMessage: ""
         }
+        this.modContent= null,
+        this.modTitle = null;
+    }
+
+    communicateMessage=(m)=>{
+        this.setState({commMessage:m})
+    }
+
+    onBodyChanged=(e)=>{
+        this.modContent = e.target.value;
+    }
+
+    onTitleChanged=(e)=>{
+        this.modTitle = e.target.value;
     }
 
     toggleEdit = () => {
@@ -48,7 +64,21 @@ class Post extends Component {
             case "CANCEL":
                 this.toggleEdit();
                 break;
-            case "SAVE":
+            case "SAVE":            
+                const modContent = this.modContent;
+                const modTitle = this.modTitle;
+
+
+                (modTitle || modContent) && 
+                apiService.editPost(post.id,modTitle || post.title,modContent || post.body,)
+                .then(c=>{                    
+                    this.communicateMessage("Saved")    
+                    this.toggleEdit();
+                    dispatch(mergePosts([c]))
+                })
+                .catch((e)=>{
+                    this.communicateMessage(e);
+                })                
                 break;
             case "THUMBSUP":
             case "THUMBSDOWN":            
@@ -56,13 +86,23 @@ class Post extends Component {
                 .then(p=>{
                     dispatch(mergePosts([p]));
                 })            
-                break;            
+                break;  
+            case "DELETE":
+                apiService.delPost(post.id)
+                .then(p=>{                                        
+                    dispatch(mergePosts([p],false))
+                })   
+                break;                       
         }
+    }
+    snackbarClosed = ()=>{
+        this.communicateMessage("");
     }
 
     render() {
-        const { post } = this.props;
-        const { editing } = this.state;
+        const { post } = this.props;        
+        const { editing,commMessage } = this.state;
+        const open = commMessage.length>0;
 
         let contentBlock;let titleBlock
         if (editing) {
@@ -72,6 +112,7 @@ class Post extends Component {
                 defaultValue={post.title} 
                 underlineStyle={{borderColor:Clouds}}
                 underlineFocusStyle={{borderColor:SunFlower}}
+                onChange={this.onTitleChanged}
                 inputStyle={{color:Clouds}}/>
             contentBlock =<CardText> <TextField id={post.id+'Body'} multiLine={true}
                 rows={5}
@@ -80,6 +121,7 @@ class Post extends Component {
                 underlineFocusStyle={{borderColor:Carrot}}
                 fullWidth={true}
                 defaultValue={post.body}
+                onChange={this.onBodyChanged}
                 ref={i=>i&&i.focus()}
             /></CardText>
         }
@@ -88,7 +130,8 @@ class Post extends Component {
             contentBlock = <CardText dangerouslySetInnerHTML={{__html:htmlizedBody(post.body)}}></CardText>
         }
 
-        return <Card>            
+        return <div>
+        <Card>            
             <CardMedia overlay={<CardTitle title={titleBlock} subtitle={<PostOrigin post={post} />} />}>
                 {post.mediaType === 'video' &&
                     <video width="100%" autoPlay="autoplay" loop="loop">
@@ -107,6 +150,10 @@ class Post extends Component {
                 <EditToolbar voteScore={post.voteScore} onAction={this.toolbarActed} editing={editing}/>
             </CardActions>
         </Card>
+        <Snackbar open={open} message={commMessage}
+                autoHideDuration={3000}
+                onRequestClose={this.snackbarClosed}/>
+        </div>
     }
 }
 

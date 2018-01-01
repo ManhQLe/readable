@@ -56,7 +56,7 @@ class Comment extends Component {
                 break;
             case "DELETE":
                 apiService.delComment(comment.id)
-                .then(c=>{                    
+                .then(c=>{                                        
                     dispatch(mergeComments([c],false))
                 })
                 
