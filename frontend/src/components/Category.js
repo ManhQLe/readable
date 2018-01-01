@@ -4,7 +4,7 @@ import {Link,withRouter} from 'react-router-dom'
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 import Post from './Post'
-import SortToolbar2 from './SortToolbar2'
+import SortToolbar from './SortToolbar'
 import AZIcon from 'material-ui/svg-icons/av/sort-by-alpha'
 import DateIcon from 'material-ui/svg-icons/action/date-range'
 import NumericIcon from 'material-ui/svg-icons/editor/format-list-numbered'
@@ -56,7 +56,7 @@ class Category extends Component {
                     </Link>
                 </li>
                 <li style={{justifyContent:"flex-end"}}>
-                    <SortToolbar2 sortBy={sortBy} sortCommands={sortCommands} onSortCommand={this.sortCommand}/>
+                    <SortToolbar sortBy={sortBy} sortCommands={sortCommands} onSortCommand={this.sortCommand}/>
                 </li>            
             </ul>            
             <Divider/>
