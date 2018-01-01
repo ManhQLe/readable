@@ -5,18 +5,16 @@ import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import { Alizarin, Carrot, SunFlower, Emerald, PeterRiver } from './colors'
 import SortIcon from 'material-ui/svg-icons/content/sort'
-import AZIcon from 'material-ui/svg-icons/av/sort-by-alpha'
-import DateIcon from 'material-ui/svg-icons/action/date-range'
-import NumericIcon from 'material-ui/svg-icons/editor/format-list-numbered'
+
 
 import PropTypes from 'prop-types';
 
 
 function SortToolbar2(props) {
 
-    const { defaultCommand = null, sortCommands, onSortCommand = () => { } } = props
+    const { sortBy = null, sortCommands, onSortCommand = () => { } } = props
     
-    const c =  sortCommands.find(x=>x.command === defaultCommand)
+    const c = sortCommands.find(x=>x.command === sortBy)
 
 
     return <div style={{display:"inline-flex",alignItems:"center" }}>
@@ -28,7 +26,7 @@ function SortToolbar2(props) {
                 color:Carrot
             }}
             iconButtonElement={<IconButton>
-                {decorateIcon}
+                {(c&&c.icon) || <SortIcon />}
             </IconButton>}
         >
             {
