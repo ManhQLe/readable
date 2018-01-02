@@ -7,6 +7,7 @@ import DefaultView from './Views/DefaultView'
 import Page404 from './Views/Page404'
 import PostView from './Views/PostView'
 import { mergeCategories, mergePosts, mergeAll } from '../actions'
+import CreatePost from './CreatePost'
 import '../css/app.css'
 
 class App extends Component {
@@ -34,6 +35,7 @@ class App extends Component {
 						<Route component={Page404}/>
 					</Switch>
 				</div>
+				<CreatePost/>
 			</div>
 		);
 	}
