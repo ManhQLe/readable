@@ -34,6 +34,7 @@ class PostView extends Component{
 
             return <div>                            
                 <Post post={post}/>
+                
                 <h1 className="h1-thin" style={{color:Turquoise}}>Comments</h1>
                 {
                     fcomments.map((c,i)=>{
