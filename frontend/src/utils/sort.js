@@ -25,7 +25,7 @@ export const postSortCommands = [
 ];
 
 export const commentSortCommands = [
-    {command:"BYAUTHOR",title:"Sort by Author",icon:<AZIcon/>,fx:PersonIcon},
+    {command:"BYAUTHOR",title:"Sort by Author",icon:<PersonIcon/>,fx:sortByAuthor},
     {command:"BYDATE",title:"Sort by Date",icon:<DateIcon/>,fx:sortByDate},
     {command:"BYSCORE",title:"Sort by Score",icon:<NumericIcon/>,fx:sortByScore}
 ];
