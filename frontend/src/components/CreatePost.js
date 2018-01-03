@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
-import {BelizeHole,Carrot, Turquoise} from './colors'
+import {BelizeHole,Carrot, Turquoise, Silver} from './colors'
 import TextField from 'material-ui/TextField'
-import DropDownMenu from 'material-ui/DropDownMenu';
+import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import FlatButton from 'material-ui/FlatButton'
 
 export default class CreatePost extends Component {
     constructor(props) {
         super(props)
         this.state={
-            title:null,
-            content:null,
-            category:true
-        }
+            title:"",
+            body:"",
+            category:""
+        }        
     }
 
     titleChanged = (e)=>{
@@ -19,16 +20,28 @@ export default class CreatePost extends Component {
     }
 
     contentChanged = (e)=>{
-        this.setState({content:e.target.value})
+        this.setState({body:e.target.value})
     }
 
-    categoryChanged = (v)=>{
-        console.log(v)
+    categoryChanged = (e,key,v)=>{        
+        this.setState({category:v})
+    }
+    
+    onButtonClicked = (act)=>{    
+        const {onAction=()=>{}} = this.props;
+
+        onAction(act,act==="SUBMIT"?this.state:null)
     }
 
     render() {
-        const {title,content,category} = this.state;
-        const {categories=[]} = this.props;
+        const {title,body,category} = this.state;
+        const {categories=[],defCat} = this.props;
+        let x = categories.find(c=>(c.path===category || c.path===defCat));
+        !x && categories.length && (x= categories[0]);
+
+        !category.length && x && this.setState({category:x.path})
+        const allowSubmit = body.length && title.length && category.length
+
         return <div>
             <TextField id='title' underlineStyle={{borderColor:BelizeHole}}
             underlineFocusStyle={{borderColor:Carrot}}
@@ -40,30 +53,33 @@ export default class CreatePost extends Component {
             />
             <br/>
             <TextField id='body' multiLine={true}
-            hintText="Give it some content :)"
+            hintText="Give it some body :)"
             floatingLabelText="Post Content"
             rows={5}
             rowsMax = {8}
             underlineStyle={{borderColor:BelizeHole}}
             underlineFocusStyle={{borderColor:Carrot}}
             fullWidth={true}
-            value = {content}
+            value = {body}
             onChange={this.contentChanged}
-
             />
             <br/>
-            <DropDownMenu 
+            <SelectField 
+                floatingLabelText="Category"
                 fullWidth={true}
-                value={category}
+                ref="X"
+                value={x?x.path:null}
                 onChange={this.categoryChanged}>
-                <MenuItem value={1} primaryText="Never" />
-                <MenuItem value={2} primaryText="Every Night" />
-                <MenuItem value={3} primaryText="Weeknights" />
-                <MenuItem value={4} primaryText="Weekends" />
-                <MenuItem value={5} primaryText="Weekly" />
-            </DropDownMenu>
-            <div>
-
+                {
+                    categories.map(c=><MenuItem key={c.path} value={c.path} primaryText={c.name}/>)
+                }
+            </SelectField>
+            <div style={{textAlign:"right"}}>
+                <FlatButton disabled={!allowSubmit}
+                            onClick={this.onButtonClicked}
+                            label="Submit" labelStyle={{ color: allowSubmit?Turquoise:Silver}}
+                />
+                <FlatButton onClick={this.onButtonClicked} label="Close" labelStyle={{ color: Carrot}}/>
             </div>
         </div>
     }

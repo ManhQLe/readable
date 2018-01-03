@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Paper from 'material-ui/Paper';
 import Category from '../Category'
+import CreatePost from '../CreatePost'
 
 class DefaultView extends Component {
     constructor(props){
@@ -14,6 +15,7 @@ class DefaultView extends Component {
             {
                 categories.map(c =><Category category={c} key={c.path}/>)
             }
+            <CreatePost categories={categories} defCat="udacity"/>
         </div>
     }
 }
