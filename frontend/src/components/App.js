@@ -7,6 +7,7 @@ import DefaultView from './Views/DefaultView'
 import Page404 from './Views/Page404'
 import PostView from './Views/PostView'
 import { mergeCategories, mergePosts, mergeAll } from '../actions'
+
 import '../css/app.css'
 
 class App extends Component {
@@ -24,9 +25,9 @@ class App extends Component {
 	render() {
 		
 		return (
-			<div>
+			<div>				
 				<AppBar/>
-				<div className="app-body">
+				<div className="app-body">					
 					<Switch>
 						<Route exact path='/' component={DefaultView} />
 						<Route exact path='/:category' component={CategoryView} />

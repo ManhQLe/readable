@@ -6,11 +6,19 @@ import { Link } from 'react-router-dom'
 
 import HomeIcon from 'material-ui/svg-icons/action/home'
 import ArrowRight from  'material-ui/svg-icons/hardware/keyboard-arrow-right'
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+
+
 const UrlPattern = require('url-pattern');
 
 export default class AppBar extends Component {
     goBack() {
         window.history.back()
+    }
+
+    onAddPost=()=>{
+        
     }
 
     render() {
@@ -34,16 +42,17 @@ export default class AppBar extends Component {
             <Link key="3" to={'/'+ category}>
                 {category}
             </Link>            
-        )
-
+        )        
 
         const pageTitle = <div className="barGrid">            
             {breadCrums}
-
         </div>
 
         return <MAppBar style={{ position: "fixed" }} title={pageTitle}
-            showMenuIconButton={false} />
+            showMenuIconButton={false} 
+            iconElementRight = {<FloatingActionButton mini={true} secondary={true} onClick={this.onAddPost}>            
+                <ContentAdd /> 
+          </FloatingActionButton>}
+            />
     }
-
 }
