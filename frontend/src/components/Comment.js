@@ -106,9 +106,8 @@ class Comment extends Component {
                 { body}
                 <CommentToolbar comment={comment} onAction={this.acted} editing={editing} />
                 <Snackbar open={open} message={commMessage}
-                autoHideDuration={3000}
-                onRequestClose={this.snackbarClosed}
-                />
+                    autoHideDuration={3000}
+                    onRequestClose={this.snackbarClosed}/>
             </div>
         )
     }
