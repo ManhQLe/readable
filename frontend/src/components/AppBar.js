@@ -6,23 +6,15 @@ import { Link } from 'react-router-dom'
 
 import HomeIcon from 'material-ui/svg-icons/action/home'
 import ArrowRight from  'material-ui/svg-icons/hardware/keyboard-arrow-right'
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
 
 
 const UrlPattern = require('url-pattern');
 
 export default class AppBar extends Component {
-    goBack() {
-        window.history.back()
-    }
 
-    onAddPost=()=>{
-        
-    }
 
     render() {
-        const { posts, comments } = this.props;
+        const { posts, comments,floatButton } = this.props;
         const pat = new UrlPattern("/:category/:postId");        
         const pat2 = new UrlPattern("/:category"); 
         const keys = pat.match(window.location.pathname)
@@ -48,11 +40,9 @@ export default class AppBar extends Component {
             {breadCrums}
         </div>
 
-        return <MAppBar style={{ position: "fixed" }} title={pageTitle}
-            showMenuIconButton={false} 
-            iconElementRight = {<FloatingActionButton mini={true} secondary={true} onClick={this.onAddPost}>            
-                <ContentAdd /> 
-          </FloatingActionButton>}
-            />
+        return  <MAppBar style={{ position: "fixed" }} title={pageTitle}
+                showMenuIconButton={false} 
+                iconElementRight = {floatButton}
+                />
     }
 }

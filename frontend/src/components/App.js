@@ -1,16 +1,29 @@
 import React, { Component } from 'react';
 import { Route, Switch,withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+
 import AppBar from './AppBar'
 import CategoryView from './Views/CategoryView'
 import DefaultView from './Views/DefaultView'
 import Page404 from './Views/Page404'
 import PostView from './Views/PostView'
+import CreatePostDialog from './CreatePostDialog'
+
 import { mergeCategories, mergePosts, mergeAll } from '../actions'
 
 import '../css/app.css'
 
 class App extends Component {
+	constructor(props){
+		super(props)
+		this.state ={
+			dlgOpen:false
+		}
+	}
+
 	componentDidMount() {
 		const { dispatch, apiService } = this.props;
 		const ps = [apiService.getCategories(), apiService.getPosts()]
@@ -22,11 +35,28 @@ class App extends Component {
 		})
 	}
 
+	toggleDlg = ()=>{
+		this.setState(s=>{return {dlgOpen:!s.dlgOpen}})
+	}
+
+	onAddPost = ()=>{
+		this.toggleDlg();
+	}
+
+	dlgResponse = (act,data)=>{
+		this.toggleDlg();
+	}
+
 	render() {
-		
+		const {dlgOpen} = this.state;
+		console.log(dlgOpen)
+		const bnt = <FloatingActionButton mini={true} secondary={true} onClick={this.onAddPost}>            
+		<ContentAdd /> 
+		</FloatingActionButton>		
+
 		return (
 			<div>				
-				<AppBar/>
+				<AppBar floatButton={bnt}/>
 				<div className="app-body">					
 					<Switch>
 						<Route exact path='/' component={DefaultView} />
@@ -35,6 +65,7 @@ class App extends Component {
 						<Route component={Page404}/>
 					</Switch>
 				</div>
+				<CreatePostDialog open={dlgOpen} onAction={this.dlgResponse}/>
 			</div>
 		);
 	}
