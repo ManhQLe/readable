@@ -49,7 +49,6 @@ class App extends Component {
 
 	render() {
 		const {dlgOpen} = this.state;
-		console.log(dlgOpen)
 		const bnt = <FloatingActionButton mini={true} secondary={true} onClick={this.onAddPost}>            
 		<ContentAdd /> 
 		</FloatingActionButton>		
@@ -65,7 +64,7 @@ class App extends Component {
 						<Route component={Page404}/>
 					</Switch>
 				</div>
-				<CreatePostDialog open={dlgOpen} onAction={this.dlgResponse}/>
+				<CreatePostDialog open={dlgOpen} categories={this.props.categories} onAction={this.dlgResponse}/>
 			</div>
 		);
 	}
@@ -73,7 +72,8 @@ class App extends Component {
 
 function mapStateToProps(state) {
 	return {
-		apiService: state.apiService
+		apiService: state.apiService,
+		categories: state.categories
 	}
 }
 

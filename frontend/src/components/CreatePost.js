@@ -19,33 +19,45 @@ export default class CreatePost extends Component {
         }        
     }
 
-  
+
+    getCurrentData(){
+        const data = {};
+        Object.assign(data,this.state);
+        return data;
+    }
+
+    changeFieldValue=(f,v)=>{
+        this.setState(s=>{
+            const data = this.getCurrentData();
+            data[f] = v;
+            const {onDataChanged} = this.props; 
+            onDataChanged && onDataChanged(data);
+            return {[f]:v};
+        })
+    }
+
     titleChanged = (e)=>{
-        this.setState({title:e.target.value});
+        this.changeFieldValue("title",e.target.value);        
     }
 
     contentChanged = (e)=>{
-        this.setState({body:e.target.value})
+        this.changeFieldValue("body",e.target.value);        
     }
 
     mediaUrlChanged = (e)=>{
-        this.setState({mediaUrl:e.target.value})
+        this.changeFieldValue("mediaUrl",e.target.value);
+
     }
 
     mediaTypeChanged = (e,key,v)=>{
-        this.setState({mediaType:v})
+        this.changeFieldValue("mediaType",v);
+
     }
 
-    categoryChanged = (e,key,v)=>{        
-        this.setState({category:v})
+    categoryChanged = (e,key,v)=>{            
+        this.changeFieldValue("category",v);
     }
-    
-    onButtonClicked = (act)=>{    
-        const {onAction=()=>{}} = this.props;
-
-        onAction(act,act==="SUBMIT"?this.state:null)
-    }
-
+   
     componentWillMount(){
         const {category} = this.state;
         const {categories=[],defCat} = this.props;
@@ -56,7 +68,7 @@ export default class CreatePost extends Component {
     render() {
         const {title,body,category,mediaType,mediaUrl} = this.state;
 
-        const {categories=[],defCat} = this.props;
+        const {categories,defCat} = this.props;
         let x = categories.find(c=>(c.path===category || c.path===defCat));
         !x && categories.length && (x= categories[0]);
 
@@ -70,11 +82,11 @@ export default class CreatePost extends Component {
             hintText="Type post title here"
             floatingLabelText="Post Title"
             value={title}
-            onChange={this.onInteraction}
+            onChange={this.titleChanged}
             />
             <br/>
             <TextField id='body' multiLine={true}
-            hintText="Give it some body :)"
+            hintText="Give it some content :)"
             floatingLabelText="Post Content"
             rows={5}
             rowsMax = {8}
@@ -98,7 +110,7 @@ export default class CreatePost extends Component {
             <br/>
             <TextField id='mediaUrl' multiLine={true}
             hintText="Link to image for your post"
-            floatingLabelText="Media URL"           
+            floatingLabelText="Media URL (Optional)"           
             underlineStyle={{borderColor:BelizeHole}}
             underlineFocusStyle={{borderColor:Carrot}}
             fullWidth={true}
@@ -114,14 +126,7 @@ export default class CreatePost extends Component {
                 <MenuItem key="image" value="image" primaryText="Image" leftIcon={<Photo/>}/>
                 <MenuItem key="video" value="video" primaryText="Video" leftIcon={<Video/>}/>
             </SelectField>
-
-            <div style={{textAlign:"right"}}>
-                <FlatButton disabled={!allowSubmit}
-                            onClick={this.onButtonClicked}
-                            label="Submit" labelStyle={{ color: allowSubmit?Turquoise:Silver}}
-                />
-                <FlatButton onClick={this.onButtonClicked} label="Close" labelStyle={{ color: Carrot}}/>
-            </div>
+          
         </div>
     }
 }
