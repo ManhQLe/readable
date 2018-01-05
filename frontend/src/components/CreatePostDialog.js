@@ -26,7 +26,7 @@ export default class CreatePostDialog extends Component {
     }
 
     render() {
-        const { open, onAction,categories=[] } = this.props;
+        const { open, onAction,categories=[],category } = this.props;
         const {allowSubmit} = this.state
 
         const actions = [
@@ -45,7 +45,7 @@ export default class CreatePostDialog extends Component {
                 open={open}
                 autoScrollBodyContent={true}
             >
-                <CreatePost ref="FORM" onDataChanged={this.onDataChanged} categories={categories}/>
+                <CreatePost ref="FORM" category={category} onDataChanged={this.onDataChanged} categories={categories}/>
             </Dialog>
         )
     }

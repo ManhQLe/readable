@@ -15,7 +15,6 @@ class DefaultView extends Component {
             {
                 categories.map(c =><Category category={c} key={c.path}/>)
             }
-            <CreatePost categories={categories} defCat="udacity"/>
         </div>
     }
 }
