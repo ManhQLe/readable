@@ -45,15 +45,18 @@ class App extends Component {
 	}
 
 	dlgResponse = (act,data)=>{
-		const {apiService, dispatch} = this.props;
-		act==="SUBMIT" && apiService.createPost(data)
-		.then(post=>{
-			dispatch(mergePosts(post))
-			this.toggleDlg();
-		})
-		.catch(ex=>{
-
-		});
+		const {apiService, dispatch} = this.props;				
+		this.toggleDlg();
+		if(act==="SUBMIT")
+		
+			apiService.createPost(data)			
+			.then(post=>{
+				dispatch(mergePosts([post]))
+				
+			})
+			.catch(ex=>{
+				console.log(ex)				
+			});
 		
 	}
 

@@ -62,7 +62,7 @@ function add (token, comment) {
 
     comments[id] = {
       id: id,
-      timestamp: Date.now(),
+      timestamp: Math.floor(Date.now()/1000),
       body: comment.body,
       author: comment.author,
       parentId: comment.parentId,

@@ -13,7 +13,7 @@ const patterns = ["patt (1).jpg","patt (1).png","patt (2).jpg","patt (2).png"
     ,"patt (3).jpg","patt (4).jpg"]
 
 
-app.use(express.static('public'))
+app.use('/public',express.static('public'))
 app.use(cors())
 
 
@@ -119,9 +119,11 @@ app.use((req, res, next) => {
         req.token = token
         next()
     } else {
+        if(!req.originalUrl.toLocaleLowerCase().startsWith("/public"))        
         res.status(403).send({
             error: 'Please provide an Authorization header to identify yourself (can be whatever you want)'
         })
+        else next();
     }
 })
 
@@ -168,11 +170,11 @@ app.get('/posts', (req, res) => {
 app.post('/posts', bodyParser.json(), (req, res) => {
     const postData = req.body
     if(!postData.mediaUrl || !postData.mediaUrl.length){
-        post.mediaUrl =  req.protocol + '://' + req.get('host') + "/public"
+        postData.mediaUrl =  req.protocol + '://' + req.hostname+ ":"+ config.port + "/public/"
         + patterns[ Math.floor(patterns.length *Math.random()) + 1]
-        post.mediaType ='image'
+        postData.mediaType ='image'
     }
-
+    console.log(postData.mediaUrl)
     posts.add(req.token, postData)
         .then(
             (data) => res.send(data),

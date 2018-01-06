@@ -88,13 +88,13 @@ function add (token, post) {
     
     posts[id] = {
       id: id,
-      timestamp: Date.now(),
+      timestamp: Math.floor(Date.now()/1000),
       title: post.title,
       body: post.body,
       author: post.author,
       category: post.category,
       mediaType:post.mediaType,
-      mediaUrl:post.mediaType,
+      mediaUrl:post.mediaUrl,
       voteScore: 0,
       deleted: false,
       commentCount: 0
