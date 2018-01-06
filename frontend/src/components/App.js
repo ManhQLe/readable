@@ -46,7 +46,7 @@ class App extends Component {
 
 	dlgResponse = (act,data)=>{
 		const {apiService, dispatch} = this.props;
-		apiService.createPost(data)
+		act==="SUBMIT" && apiService.createPost(data)
 		.then(post=>{
 			dispatch(mergePosts(post))
 			this.toggleDlg();

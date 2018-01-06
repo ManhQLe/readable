@@ -9,9 +9,13 @@ const posts = require('./posts')
 const comments = require('./comments')
 
 const app = express()
+const patterns = ["patt (1).jpg","patt (1).png","patt (2).jpg","patt (2).png"
+    ,"patt (3).jpg","patt (4).jpg"]
+
 
 app.use(express.static('public'))
 app.use(cors())
+
 
 
 app.get('/', (req, res) => {
@@ -162,7 +166,14 @@ app.get('/posts', (req, res) => {
 })
 
 app.post('/posts', bodyParser.json(), (req, res) => {
-    posts.add(req.token, req.body)
+    const postData = req.body
+    if(!postData.mediaUrl || !postData.mediaUrl.length){
+        post.mediaUrl =  req.protocol + '://' + req.get('host') + "/public"
+        + patterns[ Math.floor(patterns.length *Math.random()) + 1]
+        post.mediaType ='image'
+    }
+
+    posts.add(req.token, postData)
         .then(
             (data) => res.send(data),
             (error) => {

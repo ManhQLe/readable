@@ -93,8 +93,8 @@ function add (token, post) {
       body: post.body,
       author: post.author,
       category: post.category,
-      mediaType:post.mediaType&& post.mediaType!==''?post.mediaType:'image',
-      mediaUrl:post.mediaType&& post.mediaUrl!==''?post.mediaType:'http://www.mulierchile.com/brown-background/brown-background-006.jpg',
+      mediaType:post.mediaType,
+      mediaUrl:post.mediaType,
       voteScore: 0,
       deleted: false,
       commentCount: 0
