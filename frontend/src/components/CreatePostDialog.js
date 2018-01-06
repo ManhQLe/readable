@@ -31,10 +31,10 @@ export default class CreatePostDialog extends Component {
 
         const actions = [
             <FlatButton disabled={!allowSubmit}
-                onClick={this.onButtonClicked}
+                onClick={()=>this.onButtonClicked("SUBMIT")}
                 label="Submit" labelStyle={{ color: allowSubmit ? Turquoise : Silver }}
             />,
-            <FlatButton onClick={this.onButtonClicked} label="Close" labelStyle={{ color: Carrot }} />
+            <FlatButton onClick={()=>this.onButtonClicked("CLOSE")} label="Close" labelStyle={{ color: Carrot }} />
         ]
 
         return (

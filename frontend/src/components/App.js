@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
+
 import AppBar from './AppBar'
 import CategoryView from './Views/CategoryView'
 import DefaultView from './Views/DefaultView'
@@ -12,7 +13,7 @@ import Page404 from './Views/Page404'
 import PostView from './Views/PostView'
 import CreatePostDialog from './CreatePostDialog'
 
-import { mergeCategories, mergePosts, mergeAll } from '../actions'
+import {mergePosts, mergeAll } from '../actions'
 
 import '../css/app.css'
 
@@ -44,7 +45,16 @@ class App extends Component {
 	}
 
 	dlgResponse = (act,data)=>{
-		this.toggleDlg();
+		const {apiService, dispatch} = this.props;
+		apiService.createPost(data)
+		.then(post=>{
+			dispatch(mergePosts(post))
+			this.toggleDlg();
+		})
+		.catch(ex=>{
+
+		});
+		
 	}
 
 	render() {
