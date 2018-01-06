@@ -43,7 +43,10 @@ class Category extends Component {
             <br/>
             {
                 posts.map(p =>
-                    <div key={p.id} style={{marginBottom:".5em"}}><Post post={p} /></div>
+                    <div key={p.id} style={{marginBottom:".5em"}}>
+                        <Post post={p} />
+                        <br/>
+                    </div>
                 )                        
             }
         </div>

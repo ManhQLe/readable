@@ -18,6 +18,10 @@ import {Clouds, Alizarin,Carrot, SunFlower, Emerald, PeterRiver, Turquoise } fro
 
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 
+const cantLoadMedia=(e)=>{
+    e.target.style.display='none'
+}
+
 function PostOrigin(props) {
     const { post } = props;
     return <div>
@@ -99,6 +103,8 @@ class Post extends Component {
         this.communicateMessage("");
     }
 
+
+
     render() {
         const { post } = this.props;        
         const { editing,commMessage } = this.state;
@@ -132,18 +138,18 @@ class Post extends Component {
 
         return <div>
         <Card>            
-            <CardMedia overlay={<CardTitle title={titleBlock} subtitle={<PostOrigin post={post} />} />}>
+            <CardMedia>
                 {post.mediaType === 'video' &&
-                    <video width="100%" autoPlay="autoplay" loop="loop">
+                    <video width="100%" autoPlay="autoplay" loop="loop" onerror="this.style.display='none'" >
                         <source src={post.mediaUrl} />
                     </video>
                 }
                 {
                     post.mediaType === 'image' &&
-                    <img width="100%" src={post.mediaUrl} />
+                    <img width="100%" src={post.mediaUrl} onError={cantLoadMedia} />
                 }
             </CardMedia>
-
+            <CardTitle title={titleBlock} subtitle={<PostOrigin post={post} />} />
             {contentBlock}
 
             <CardActions>

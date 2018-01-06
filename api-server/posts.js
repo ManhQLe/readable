@@ -12,7 +12,7 @@ const defaultData = {
     category: 'react',
     voteScore: 6,
     mediaType:"image",
-    mediaUrl:"https://d125fmws0bore1.cloudfront.net/assets/pages/ndop/nd019/video-bg-nd019-c0fe54fcae4dd7c967a4e4f9fa63c06356fd57034c0b72377fa557d24a18bbef.jpg",
+    mediaUrl:"http://localhost:3001/public/patt (3).jpg",
     deleted: false,
     commentCount: 2
   },
@@ -24,7 +24,7 @@ const defaultData = {
     author: 'Manh Le',
     category: 'redux',
     mediaType:"image",
-    mediaUrl:"https://raw.githubusercontent.com/reactjs/redux/master/logo/logo-title-dark.png",
+    mediaUrl:"http://localhost:3001/public/patt (4).jpg",
     voteScore: -5,
     deleted: false,
     commentCount: 0
@@ -37,7 +37,7 @@ const defaultData = {
     author: 'Manh Le',
     category: 'redux',
     mediaType:"image",
-    mediaUrl:"https://t3.ftcdn.net/jpg/01/04/48/60/240_F_104486058_zjCPDxg6tcBnsMM3fNQLDGvm8FGcBfb1.jpg",
+    mediaUrl:"http://localhost:3001/public/patt (2).png",
     voteScore: 2,
     deleted: false,
     commentCount: 0
