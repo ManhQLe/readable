@@ -78,7 +78,7 @@ class Comment extends Component {
         const { comment } = this.props
         const { editing,commMessage } = this.state;
         const open = commMessage.length>0;
-        const content =this.modContent || comment.body;
+        const content =this.modContent || comment.body || "";
         let body;        
         body = editing?<TextField id={comment.id+'Body'} multiLine={true}
         rows={5}

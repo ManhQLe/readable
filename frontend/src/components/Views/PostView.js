@@ -13,7 +13,6 @@ import Comment from '../Comment'
 import Page404 from './Page404'
 import CreateComment from '../CreateComment'
 
-
 class PostView extends Component{
     constructor(props){
         super(props);
@@ -25,6 +24,19 @@ class PostView extends Component{
 
     onSortCommand = (s,d)=>{
         this.setState({sortBy:s,asc:d});
+    }
+
+    commentPosting = (comment)=>{
+        const {apiService,match,dispatch} = this.props;
+        const data={body:comment,author:"Manh Le", parentId: match.params.postId};
+
+        apiService.addComment(data)
+        .then(comment=>{
+            dispatch(mergeComments([comment]));
+        })
+        .catch(ex=>{
+            console.log(ex)
+        })
     }
 
     render(){
@@ -57,7 +69,7 @@ class PostView extends Component{
                     </li>
                 </ul>
                 {
-                    <CreateComment/>
+                    <CreateComment onPost={this.commentPosting}/>
                 }
                 {
                     fcomments.map((c,i)=>{

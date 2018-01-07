@@ -89,8 +89,8 @@ export default class ApiService {
         return fetch(url, ajaxOptions).then(r => r.json())
     }
 
-    addComment(postid,data) {
-        const url = `${this.url}/posts/${postid}/comments`;
+    addComment(data) {
+        const url = `${this.url}/comments`;
         let ajaxOptions = this.getOptions();
         ajaxOptions.method = "POST"
         ajaxOptions.headers["Content-Type"] = "application/json"

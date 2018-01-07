@@ -33,7 +33,7 @@ export default class CreateComment extends Component{
             onChange={this.contentChanged}
             />
             <div style={{textAlign:"right"}}>
-                <FlatButton disabled={body.length<=0} onClick={()=>onPost(this.state.body)} label="Post" labelStyle={{ color:body.length>0? Carrot:Silver }} />
+                <FlatButton disabled={body.length<=0} onClick={()=>{onPost(this.state.body), this.setState({body:''})}} label="Post" labelStyle={{ color:body.length>0? Carrot:Silver }} />
             </div>
         </div>
         )
