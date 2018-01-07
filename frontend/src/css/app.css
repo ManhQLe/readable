@@ -41,14 +41,19 @@
 }
 
 a{
-    color: inherit;
+    color: #FFF3E0;
     text-decoration: none;
 }
 
-a:hover{
-    color:"red"
+a.cat{
+    color: #00BCD4;
+    text-decoration: none;
 }
 
+a.post{
+    color: #FF6E40;
+    text-decoration: none;
+}
 
 .smallerToolbar{
     transform: scale(0.8);

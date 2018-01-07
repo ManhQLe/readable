@@ -31,7 +31,7 @@ class Category extends Component {
         return <div>
             <ul className='grid'>
                 <li>
-                    <Link to={`/${category.path}`}>
+                    <Link className="cat" to={`/${category.path}`}>
                         <h1 style={{ display: "inline-block",margin:0 }}>{category.name}</h1>
                     </Link>
                 </li>

@@ -14,7 +14,7 @@ import { mergePosts } from '../actions'
 import PropTypes from 'prop-types'
 
 
-import {Clouds, Alizarin,Carrot, SunFlower, Emerald, PeterRiver, Turquoise } from './colors'
+import {Clouds, Alizarin,Carrot, SunFlower,Abestos, Emerald, PeterRiver, Turquoise } from './colors'
 
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 
@@ -132,14 +132,14 @@ class Post extends Component {
             /></CardText>
         }
         else{
-            titleBlock= <Link to={`/${post.category}/${post.id}`}>{post.title}</Link>
+            titleBlock= <Link className="post" to={`/${post.category}/${post.id}`}>{post.title}</Link>
             contentBlock = <CardText dangerouslySetInnerHTML={{__html:htmlizedBody(post.body)}}></CardText>
         }
 
         return <div>
         <Card>       
         <CardHeader title={post.author}
-                subtitle={<span style={{ color: SunFlower }}>{moment.unix(post.timestamp).format("dddd, MMMM Do YYYY")}</span>}
+                subtitle={<span style={{ color: Abestos }}>{moment.unix(post.timestamp).format("dddd, MMMM Do YYYY")}</span>}
                 avatar=""
                 /> 
             <CardMedia>
