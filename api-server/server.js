@@ -119,12 +119,19 @@ app.use((req, res, next) => {
         req.token = token
         next()
     } else {
-        if(!req.originalUrl.toLocaleLowerCase().startsWith("/public"))        
+        const url= req.originalUrl.toLocaleLowerCase();
+        if(url.startsWith("/public") || url.startsWith("/login"))            
+            next();
+        else
         res.status(403).send({
             error: 'Please provide an Authorization header to identify yourself (can be whatever you want)'
         })
-        else next();
+        
     }
+})
+
+app.get('/login',(req,res)=>{
+    
 })
 
 

@@ -1,5 +1,6 @@
 const clone = require('clone')
 const uuidv4 = require('uuid/v4')
+const config = require('./config')
 let db = {}
 
 const defaultData = {
@@ -12,7 +13,7 @@ const defaultData = {
     category: 'react',
     voteScore: 6,
     mediaType:"image",
-    mediaUrl:"http://localhost:3001/public/patt (3).jpg",
+    mediaUrl:config.origin +"/public/patt (3).jpg",
     deleted: false,
     commentCount: 2
   },
@@ -24,7 +25,7 @@ const defaultData = {
     author: 'Manh Le',
     category: 'redux',
     mediaType:"image",
-    mediaUrl:"http://localhost:3001/public/patt (4).jpg",
+    mediaUrl:config.origin +"/public/patt (4).jpg",
     voteScore: -5,
     deleted: false,
     commentCount: 0
@@ -37,7 +38,7 @@ const defaultData = {
     author: 'Manh Le',
     category: 'redux',
     mediaType:"image",
-    mediaUrl:"http://localhost:3001/public/patt (2).png",
+    mediaUrl:config.origin +"/public/patt (2).png",
     voteScore: 2,
     deleted: false,
     commentCount: 0
