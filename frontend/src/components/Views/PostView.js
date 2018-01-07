@@ -11,7 +11,7 @@ import {mergeComments} from '../../actions'
 import Post from '../Post'
 import Comment from '../Comment'
 import Page404 from './Page404'
-
+import CreateComment from '../CreateComment'
 
 
 class PostView extends Component{
@@ -56,6 +56,9 @@ class PostView extends Component{
                         <SortToolbar sortCommands={commentSortCommands} sortBy={sortBy} asc={asc} onSortCommand={this.onSortCommand}/>
                     </li>
                 </ul>
+                {
+                    <CreateComment/>
+                }
                 {
                     fcomments.map((c,i)=>{
                         return <div key={c.id} > 

@@ -120,7 +120,7 @@ class Post extends Component {
                 underlineFocusStyle={{borderColor:SunFlower}}
                 onChange={this.onTitleChanged}
                 inputStyle={{color:Clouds}}/>
-            contentBlock =<CardText> <TextField id={post.id+'Body'} multiLine={true}
+            contentBlock =<CardText><TextField id={post.id+'Body'} multiLine={true}
                 rows={5}
                 rowsMax = {8}
                 underlineStyle={{borderColor:Clouds}}
@@ -137,7 +137,11 @@ class Post extends Component {
         }
 
         return <div>
-        <Card>            
+        <Card>       
+        <CardHeader title={post.author}
+                subtitle={<span style={{ color: SunFlower }}>{moment.unix(post.timestamp).format("dddd, MMMM Do YYYY")}</span>}
+                avatar=""
+                /> 
             <CardMedia>
                 {post.mediaType === 'video' &&
                     <video width="100%" autoPlay="autoplay" loop="loop" onerror="this.style.display='none'" >
@@ -149,7 +153,7 @@ class Post extends Component {
                     <img width="100%" src={post.mediaUrl} onError={cantLoadMedia} />
                 }
             </CardMedia>
-            <CardTitle title={titleBlock} subtitle={<PostOrigin post={post} />} />
+            <CardTitle title={titleBlock}/>
             {contentBlock}
 
             <CardActions>
