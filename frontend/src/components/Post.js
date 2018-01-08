@@ -8,6 +8,8 @@ import FontIcon from 'material-ui/FontIcon';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {Link} from 'react-router-dom'
+
+import AppSettings from '../AppSettings'
 import { connect } from 'react-redux'
 import EditToolbar from './EditToolbar'
 import { mergePosts } from '../actions'
@@ -140,7 +142,7 @@ class Post extends Component {
         <Card>       
         <CardHeader title={post.author}
                 subtitle={<span style={{ color: Abestos }}>{moment.unix(post.timestamp).format("dddd, MMMM Do YYYY")}</span>}
-                avatar=""
+                avatar={AppSettings.getUrl()+"/public/avatar/annonymous.png"}
                 /> 
             <CardMedia>
                 {post.mediaType === 'video' &&

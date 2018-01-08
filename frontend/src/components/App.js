@@ -12,7 +12,7 @@ import DefaultView from './Views/DefaultView'
 import Page404 from './Views/Page404'
 import PostView from './Views/PostView'
 import CreatePostDialog from './CreatePostDialog'
-
+import LoginPage from './LoginPage'
 import {mergePosts, mergeAll } from '../actions'
 
 import '../css/app.css'
@@ -69,7 +69,8 @@ class App extends Component {
 		return (
 			<div>				
 				<AppBar floatButton={bnt}/>
-				<div className="app-body">					
+				<div className="app-body">
+					<LoginPage/>					
 					<Switch>
 						<Route exact path='/' component={DefaultView} />
 						<Route exact path='/:category' component={CategoryView} />
