@@ -8,9 +8,12 @@ const users={
 }
 
 
-module.export={
+module.exports={
     getUser:function(usename){
         const user=users[username.toLocaleLowerCase()]
         return user;
+    },
+    addUser(username,data){
+        users[username] = data;
     }
 }
