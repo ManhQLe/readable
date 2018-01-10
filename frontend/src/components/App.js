@@ -60,29 +60,37 @@ class App extends Component {
 
 	}
 
-	onLogin = (type,un)=>{
+	onLogin = (type, un) => {
 		const LOGINFORM = this.refs.LOGINFORM;
 		LOGINFORM.setEnable(false);
+
 		const { apiService, dispatch } = this.props;
-		const isGit = type==="GITHUB";
-		apiService.login(un,isGit)
-		.then(u=>{
-			LOGINFORM.setEnable(true);
-			console.log(u)			
-		})
-		.catch(ex=>{
-			ex.then(m=>
-			LOGINFORM.setState({
-				isEnabled:true,
-				error:m
-			}))
-		})
-		
+		const isGit = type === "GITHUB";
+		apiService.login(un, isGit)
+			.then(u => {
+				LOGINFORM.setEnable(true);
+				const ps = [apiService.getCategories(), apiService.getPosts(), Promise.resolve(u)]
+
+				Promise.all(ps).then(([categories, posts, loginAccount]) => {
+					dispatch(mergeAll({ categories, posts, loginAccount }));
+
+				}).catch(x => {
+					console.log(x);
+				})
+			})
+			.catch(ex => {
+				ex.then(m =>
+					LOGINFORM.setState({
+						isEnabled: true,
+						error: m
+					}))
+			})
+
 	}
 
 	render() {
-		const { dlgOpen} = this.state;
-		const { loginAccount} = this.props;
+		const { dlgOpen } = this.state;
+		const { loginAccount } = this.props;
 		if (loginAccount) {
 
 			const bnt = <FloatingActionButton mini={true} secondary={true} onClick={this.onAddPost}>
@@ -93,7 +101,7 @@ class App extends Component {
 				<div>
 					<AppBar floatButton={bnt} />
 					<div className="app-body">
-						
+
 						<Switch>
 							<Route exact path='/' component={DefaultView} />
 							<Route exact path='/:category' component={CategoryView} />
@@ -106,7 +114,7 @@ class App extends Component {
 			);
 		}
 		else {
-			return <LoginPage ref="LOGINFORM" onLogin={this.onLogin}/>
+			return <LoginPage ref="LOGINFORM" onLogin={this.onLogin} />
 		}
 	}
 }
