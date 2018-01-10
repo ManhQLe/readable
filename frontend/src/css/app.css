@@ -1,11 +1,15 @@
+body{
+    font-family: Roboto, sans-serif;
+}
+
 .app-body{
-    padding-top:80px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-top:80px;    
     margin-left: 10px;
     margin-right: 10px;
     width:80%;
     padding-left: 10%;
     padding-right: 10%;
+
 }
 
 .app-header{

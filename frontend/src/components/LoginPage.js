@@ -6,21 +6,18 @@ import PropTypes from 'prop-types';
 
 import Icon from '../icons/github.svg'
 
-
-///https://api.github.com/users/manhqle
-
 export default class LoginPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
             login: "",
-            isEnable:true,
+            isEnabled:true,
             error:""
         }
     }
 
-    setEnable=(isEnable)=>{
-        this.setState({isEnable});
+    setEnable=(isEnabled)=>{
+        this.setState({isEnabled});
     }
     
     setError = (error)=>{
@@ -33,12 +30,12 @@ export default class LoginPage extends Component {
     }
 
     render() {
-        const { login,isEnable,error } = this.state;
+        const { login,isEnabled,error } = this.state;
         return (
             <div style={{ textAlign: "center" }}>
                 <div style={{ width: 250,display:"inline-block" }}>
                     <TextField fullWidth={true}
-                        disabled={!isEnable}
+                        disabled={!isEnabled}
                         underlineStyle={{ borderColor: Silver }}
                         underlineFocusStyle={{ borderColor: Alizarin }}
                         floatingLabelText="Github's Username"
@@ -48,7 +45,7 @@ export default class LoginPage extends Component {
                     />
                     <br />
                     <RaisedButton
-                        style={{ width: 200 }} disabled={login.length === 0 || !isEnable} backgroundColor="#00BCD4"
+                        style={{ width: 200 }} disabled={login.length === 0 || !isEnabled} backgroundColor="#00BCD4"
                         fullWidth={true}
                         labelStyle={{ color: "white" }}
                         label="Login with GitHub"
@@ -59,7 +56,7 @@ export default class LoginPage extends Component {
 
                     <RaisedButton backgroundColor="#00BCD4"
                         fullWidth={true}
-                        disabled={!isEnable}
+                        disabled={!isEnabled}
                         labelStyle={{ color: "white" }}
                         label="Continue as Annonymous"
                         onClick = {()=>this.login("ANNONYMOUS")}

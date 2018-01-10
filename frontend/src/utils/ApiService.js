@@ -7,10 +7,10 @@ export default class ApiService {
 
     getCategories() {
         const url = `${this.url}/categories`;
-        return fetch(url,this.getOptions()).then(r => {            
-            return r.json()
-        })
-        .then(json=>json.categories) 
+        return fetch(url, this.getOptions()).then(r => {
+                return r.json()
+            })
+            .then(json => json.categories)
     }
 
     /*************POSTS**************/
@@ -19,7 +19,7 @@ export default class ApiService {
         cat = cat && cat.length ? ('/' + cat) : '';
         const url = `${this.url}${cat}/posts`;
         let ajaxOptions = this.getOptions();
-        return fetch(url,ajaxOptions).then(r => r.json())
+        return fetch(url, ajaxOptions).then(r => r.json())
     }
 
     getPost(id) {
@@ -99,25 +99,29 @@ export default class ApiService {
         return fetch(url, ajaxOptions).then(r => r.json())
     }
 
-    voteComment(id,isUp){
+    voteComment(id, isUp) {
         const url = `${this.url}/comments/${id}`;
         const option = isUp ? "upVote" : "downVote"
 
         let ajaxOptions = this.getOptions();
         ajaxOptions.method = "POST"
         ajaxOptions.headers["Content-Type"] = "application/json"
-        ajaxOptions.body = JSON.stringify({option});
+        ajaxOptions.body = JSON.stringify({
+            option
+        });
 
         return fetch(url, ajaxOptions).then(r => r.json())
     }
 
-    editComment(id,body){
-        const url = `${this.url}/comments/${id}`;        
+    editComment(id, body) {
+        const url = `${this.url}/comments/${id}`;
 
         let ajaxOptions = this.getOptions();
         ajaxOptions.method = "PUT"
         ajaxOptions.headers["Content-Type"] = "application/json"
-        ajaxOptions.body = JSON.stringify({body});
+        ajaxOptions.body = JSON.stringify({
+            body
+        });
 
         return fetch(url, ajaxOptions).then(r => r.json())
     }
@@ -141,12 +145,18 @@ export default class ApiService {
         }
     }
 
-    login(un,isGit){
+    login(un, isGit) {
         let ajaxOptions = this.getOptions();
         ajaxOptions.method = "POST"
         ajaxOptions.headers["Content-Type"] = "application/json"
-        ajaxOptions.body = JSON.stringify({un,isGit});
+        ajaxOptions.body = JSON.stringify({
+            un,
+            isGit
+        });
         const url = `${this.url}/login`;
-        return fetch(url, ajaxOptions).then(r => r.json())
+        return fetch(url, ajaxOptions).then(r => {
+            if (r.ok) return r.json()            
+            throw r.text();
+        })        
     }
 }

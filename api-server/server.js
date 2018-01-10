@@ -121,7 +121,7 @@ app.use((req, res, next) => {
         next()
     } else {
         const url= req.originalUrl.toLocaleLowerCase();
-        if(url.startsWith("/public") || url.startsWith("/users"))            
+        if(url.startsWith("/public") || url.startsWith("/login"))            
             next();
         else
         res.status(403).send({
@@ -136,8 +136,13 @@ app.post('/login',bodyParser.json(),(req,res)=>{
     const un = body.un;    
     if(body.isGit){
         const url = `https://api.github.com/users/${un}`
-        fetch(url).then(r => {
-            const u = r.json();
+        fetch(url).then(r =>{
+            if(r.ok)
+                return r.json()
+            throw new Error("Invalid credentials");
+        })
+        .then(u=>{   
+            console.log(u)        
             const nu = users.addUser(un,{
                 avatarUrl: u.avatar_url,
                 name:u.name
@@ -145,7 +150,8 @@ app.post('/login',bodyParser.json(),(req,res)=>{
             res.send(nu)
         })
         .catch(ex=>{
-            res.status(403).send("Username or password is incorrect");
+            console.log(ex);
+            res.status(403).send(ex.message);
         })
     }
     else

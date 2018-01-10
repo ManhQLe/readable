@@ -61,10 +61,23 @@ class App extends Component {
 	}
 
 	onLogin = (type,un)=>{
+		const LOGINFORM = this.refs.LOGINFORM;
+		LOGINFORM.setEnable(false);
 		const { apiService, dispatch } = this.props;
 		const isGit = type==="GITHUB";
+		apiService.login(un,isGit)
+		.then(u=>{
+			LOGINFORM.setEnable(true);
+			console.log(u)			
+		})
+		.catch(ex=>{
+			ex.then(m=>
+			LOGINFORM.setState({
+				isEnabled:true,
+				error:m
+			}))
+		})
 		
-		console.log(type==="GITHUB",un);
 	}
 
 	render() {
@@ -93,7 +106,7 @@ class App extends Component {
 			);
 		}
 		else {
-			return <LoginPage onLogin={this.onLogin}/>
+			return <LoginPage ref="LOGINFORM" onLogin={this.onLogin}/>
 		}
 	}
 }
