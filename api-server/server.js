@@ -151,9 +151,7 @@ app.post('/login',bodyParser.json(),(req,res)=>{
     else
     {
         res.send(users.addUser(un));
-    }
-
-  
+    }  
 })
 
 

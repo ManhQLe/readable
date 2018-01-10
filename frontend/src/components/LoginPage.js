@@ -19,7 +19,7 @@ export default class LoginPage extends Component {
 
     login = (type)=>{
         const {onLogin} = this.props;
-        onLogin(type,type=="GITHUB"?this.state.login:type);
+        onLogin(type,type=="GITHUB"?this.state.login:type.toLocaleLowerCase());
     }
 
     render() {

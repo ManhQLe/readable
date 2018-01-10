@@ -21,20 +21,19 @@ class App extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			dlgOpen: false,
-			loginAccount: null
+			dlgOpen: false
 		}
 	}
 
 	componentDidMount() {
-		const { dispatch, apiService } = this.props;
-		const ps = [apiService.getCategories(), apiService.getPosts()]
+		// const { dispatch, apiService } = this.props;
+		// const ps = [apiService.getCategories(), apiService.getPosts()]
 
-		Promise.all(ps).then(([categories, posts]) => {
-			dispatch(mergeAll({ categories, posts }));
-		}).catch(x => {
-			console.log(x);
-		})
+		// Promise.all(ps).then(([categories, posts]) => {
+		// 	dispatch(mergeAll({ categories, posts }));
+		// }).catch(x => {
+		// 	console.log(x);
+		// })
 	}
 
 	toggleDlg = () => {
@@ -62,11 +61,12 @@ class App extends Component {
 	}
 
 	onLogin = (type,un)=>{
-		
+
 	}
 
 	render() {
-		const { dlgOpen, loginAccount } = this.state;
+		const { dlgOpen} = this.state;
+		const { loginAccount} = this.props;
 		if (loginAccount) {
 
 			const bnt = <FloatingActionButton mini={true} secondary={true} onClick={this.onAddPost}>
@@ -98,7 +98,8 @@ class App extends Component {
 function mapStateToProps(state) {
 	return {
 		apiService: state.apiService,
-		categories: state.categories
+		categories: state.categories,
+		loginAccount: state.loginAccount
 	}
 }
 

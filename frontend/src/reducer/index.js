@@ -2,7 +2,7 @@ import initialState from './state'
 import categoryReducer from './categoryReducer'
 import postReducer from './postReducer'
 import commentReducer from './commentReducer'
-
+import loginReducer from './loginReducer'
 
 function reducerCreator(reducerObj) {
     return (state = initialState, action) => {
@@ -19,5 +19,6 @@ function reducerCreator(reducerObj) {
 export default reducerCreator({
     "categories":categoryReducer,
     "posts":postReducer,
-    "comments":commentReducer
+    "comments":commentReducer,
+    "loginAccount":loginReducer
 })

@@ -143,8 +143,10 @@ export default class ApiService {
 
     login(un,isGit){
         let ajaxOptions = this.getOptions();
-        ajaxOptions.method = "PUT"
+        ajaxOptions.method = "POST"
         ajaxOptions.headers["Content-Type"] = "application/json"
-        ajaxOptions.body = JSON.stringify({body});     
+        ajaxOptions.body = JSON.stringify({un,isGit});
+        const url = `${this.url}/login`;
+        return fetch(url, ajaxOptions).then(r => r.json())
     }
 }
