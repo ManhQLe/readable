@@ -7,7 +7,8 @@ const config = require('./config')
 const categories = require('./categories')
 const posts = require('./posts')
 const comments = require('./comments')
-
+const users  = require('./users');
+const fetch = require('node-fetch');
 const app = express()
 const patterns = ["patt (1).jpg","patt (1).png","patt (2).jpg","patt (2).png"
     ,"patt (3).jpg","patt (4).jpg"]
@@ -120,7 +121,7 @@ app.use((req, res, next) => {
         next()
     } else {
         const url= req.originalUrl.toLocaleLowerCase();
-        if(url.startsWith("/public") || url.startsWith("/login"))            
+        if(url.startsWith("/public") || url.startsWith("/users"))            
             next();
         else
         res.status(403).send({
@@ -130,8 +131,29 @@ app.use((req, res, next) => {
     }
 })
 
-app.get('/login',(req,res)=>{
-    
+app.post('/login',bodyParser.json(),(req,res)=>{
+    const body = req.body
+    const un = body.un;    
+    if(body.isGit){
+        const url = `https://api.github.com/users/${un}`
+        fetch(url).then(r => {
+            const u = r.json();
+            const nu = users.addUser(un,{
+                avatarUrl: u.avatar_url,
+                name:u.name
+            })
+            res.send(nu)
+        })
+        .catch(ex=>{
+            res.status(403).send("Username or password is incorrect");
+        })
+    }
+    else
+    {
+        res.send(users.addUser(un));
+    }
+
+  
 })
 
 

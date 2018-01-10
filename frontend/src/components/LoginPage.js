@@ -17,6 +17,11 @@ export default class LoginPage extends Component {
         }
     }
 
+    login = (type)=>{
+        const {onLogin} = this.props;
+        onLogin(type,type=="GITHUB"?this.state.login:type);
+    }
+
     render() {
         const { login } = this.state;
         return (
@@ -36,15 +41,23 @@ export default class LoginPage extends Component {
                         fullWidth={true}
                         labelStyle={{ color: "white" }}
                         label="Login with GitHub"
-                        icon={<img src={Icon} width={24} height={24} alt="github" />} />
+                        icon={<img src={Icon} width={24} height={24} alt="github" />} 
+                        onClick = {()=>this.login("GITHUB")}
+                    />
                     <div style={{ margin: 12 }}> OR </div>
 
                     <RaisedButton backgroundColor="#00BCD4"
                         fullWidth={true}
                         labelStyle={{ color: "white" }}
-                        label="Continue as Annonymous" />
+                        label="Continue as Annonymous"
+                        onClick = {()=>this.login("ANNONYMOUS")}
+                    />
                 </div>
             </div>
         )
+    }
+
+    static propTypes ={
+        onLogin: PropTypes.func.isRequired
     }
 }

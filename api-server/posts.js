@@ -1,6 +1,7 @@
 const clone = require('clone')
 const uuidv4 = require('uuid/v4')
 const config = require('./config')
+const users = require('./users')
 let db = {}
 
 const defaultData = {
@@ -49,6 +50,11 @@ function getData (token) {
   let data = db[token]
   if (data == null) {
     data = db[token] = clone(defaultData)
+    const keys = Object.keys(data);
+    keys.forEach(k=>{
+      const d = data[k]
+      d["authorData"] = users.getUser(d.author)
+    })    
   }
   return data
 }

@@ -140,4 +140,11 @@ export default class ApiService {
             Authorization: this.token
         }
     }
+
+    login(un,isGit){
+        let ajaxOptions = this.getOptions();
+        ajaxOptions.method = "PUT"
+        ajaxOptions.headers["Content-Type"] = "application/json"
+        ajaxOptions.body = JSON.stringify({body});     
+    }
 }

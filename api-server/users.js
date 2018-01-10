@@ -1,19 +1,23 @@
 const config = require('./config')
 
-const users={
-    annonymous:{
-        avatarUrl:config.origin +  "/public/avatar/Annonymous.png"        ,
-        name:"Annonymous"
+const users={    
+}
+const getDefaultUser=(un)=>{
+    return {
+        avatarUrl:config.origin +  "/public/avatar/Annonymous.png" ,
+        name:un 
     }
 }
 
-
 module.exports={
-    getUser:function(usename){
+    getUser:function(username){
         const user=users[username.toLocaleLowerCase()]
-        return user;
+        return user?user:getDefaultUser(username);
     },
     addUser(username,data){
-        users[username] = data;
-    }
+        const user=users[username.toLocaleLowerCase()]
+        !data && (data = getDefaultUser(username))
+        return users[username] = data;
+    },
+    
 }
