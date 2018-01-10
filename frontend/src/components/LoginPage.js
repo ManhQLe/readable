@@ -13,8 +13,18 @@ export default class LoginPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            login: ""
+            login: "",
+            isEnable:true,
+            error:""
         }
+    }
+
+    setEnable=(isEnable)=>{
+        this.setState({isEnable});
+    }
+    
+    setError = (error)=>{
+        this.setState({error});
     }
 
     login = (type)=>{
@@ -23,11 +33,12 @@ export default class LoginPage extends Component {
     }
 
     render() {
-        const { login } = this.state;
+        const { login,isEnable,error } = this.state;
         return (
             <div style={{ textAlign: "center" }}>
                 <div style={{ width: 250,display:"inline-block" }}>
                     <TextField fullWidth={true}
+                        disabled={!isEnable}
                         underlineStyle={{ borderColor: Silver }}
                         underlineFocusStyle={{ borderColor: Alizarin }}
                         floatingLabelText="Github's Username"
@@ -37,7 +48,7 @@ export default class LoginPage extends Component {
                     />
                     <br />
                     <RaisedButton
-                        style={{ width: 200 }} disabled={login.length === 0} backgroundColor="#00BCD4"
+                        style={{ width: 200 }} disabled={login.length === 0 || !isEnable} backgroundColor="#00BCD4"
                         fullWidth={true}
                         labelStyle={{ color: "white" }}
                         label="Login with GitHub"
@@ -48,10 +59,14 @@ export default class LoginPage extends Component {
 
                     <RaisedButton backgroundColor="#00BCD4"
                         fullWidth={true}
+                        disabled={!isEnable}
                         labelStyle={{ color: "white" }}
                         label="Continue as Annonymous"
                         onClick = {()=>this.login("ANNONYMOUS")}
                     />
+                    <br/>
+                    <br/>                    
+                    <span style={{color:Alizarin}}>{error}</span>
                 </div>
             </div>
         )

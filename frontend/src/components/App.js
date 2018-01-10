@@ -61,7 +61,10 @@ class App extends Component {
 	}
 
 	onLogin = (type,un)=>{
-
+		const { apiService, dispatch } = this.props;
+		const isGit = type==="GITHUB";
+		
+		console.log(type==="GITHUB",un);
 	}
 
 	render() {
