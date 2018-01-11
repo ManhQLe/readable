@@ -6,6 +6,7 @@ const state = {
     categories:[], 
     posts:[],
     comments:[],
+    collapseStates:{},
     apiService: new ApiService(AppSettings.getUrl(),AppSettings.TOKEN)
 }
 

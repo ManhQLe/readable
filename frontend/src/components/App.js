@@ -23,18 +23,7 @@ class App extends Component {
 		this.state = {
 			dlgOpen: false
 		}
-	}
-
-	componentDidMount() {
-		// const { dispatch, apiService } = this.props;
-		// const ps = [apiService.getCategories(), apiService.getPosts()]
-
-		// Promise.all(ps).then(([categories, posts]) => {
-		// 	dispatch(mergeAll({ categories, posts }));
-		// }).catch(x => {
-		// 	console.log(x);
-		// })
-	}
+	}	
 
 	toggleDlg = () => {
 		this.setState(s => { return { dlgOpen: !s.dlgOpen } })
@@ -52,7 +41,7 @@ class App extends Component {
 			apiService.createPost(data)
 				.then(post => {
 					dispatch(mergePosts([post]))
-
+					this.props.history.push(`${post.category}/${post.id}`);
 				})
 				.catch(ex => {
 					console.log(ex)

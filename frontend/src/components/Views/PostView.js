@@ -27,8 +27,8 @@ class PostView extends Component{
     }
 
     commentPosting = (comment)=>{
-        const {apiService,match,dispatch} = this.props;
-        const data={body:comment,author:"Manh Le", parentId: match.params.postId};
+        const {apiService,match,dispatch,loginAccount} = this.props;
+        const data={body:comment,author:loginAccount.login, parentId: match.params.postId};
 
         apiService.addComment(data)
         .then(comment=>{
@@ -92,6 +92,7 @@ function mapStateToProps(state) {
     return {        
         posts: state.posts,
         comments:state.comments,
+        loginAccount:state.loginAccount,
         apiService: state.apiService
     }
 }

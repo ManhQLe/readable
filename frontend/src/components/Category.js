@@ -6,6 +6,7 @@ import Divider from 'material-ui/Divider';
 import Post from './Post'
 import SortToolbar from './SortToolbar'
 import {postSortCommands} from '../utils/sort'
+import {setCollapseState} from '../actions'
 
 class Category extends Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class Category extends Component {
         this.state={
             sortBy: "BYTITLE",
             asc:true,
+            collapsed:false
         }
     }
 
@@ -20,17 +22,25 @@ class Category extends Component {
         this.setState({sortBy:by,asc})
     }
 
+    toggleCollapse=()=>{
+        const { category,dispatch,collapseStates } = this.props; 
+        const path =category.path;
+        dispatch(setCollapseState(path,!collapseStates[path]));
+    }
+
     render() {
         const {sortBy,asc} = this.state;
-        const { category } = this.props;        
+        const { category,collapseStates } = this.props;        
         const posts = this.props.posts.filter(p=>p.category === category.path);
         let sortfx = postSortCommands.find(x=>x.command===sortBy);
-        
+        const collapsed = collapseStates[category.path]?true:false;
+
         sortfx && posts.sort((a,b)=>sortfx.fx(a,b,asc));
         
         return <div>
             <ul className='grid'>
                 <li>
+                    <i onClick={this.toggleCollapse} className="fa fa-caret-right expandButton" aria-hidden="true" data-collapsed={collapsed.toString()}></i>
                     <Link className="cat" to={`/${category.path}`}>
                         <h1 style={{ display: "inline-block",margin:0 }}>{category.name}</h1>
                     </Link>
@@ -42,7 +52,7 @@ class Category extends Component {
             <Divider/>
             <br/>
             {
-                posts.map(p =>
+                !collapsed && posts.map(p =>
                     <div key={p.id} style={{marginBottom:".5em"}}>
                         <Post post={p} />
                         <br/>
@@ -55,7 +65,8 @@ class Category extends Component {
 function mapStateToProps(state) {
     return {        
         posts: state.posts,
-        apiService: state.apiService
+        apiService: state.apiService,
+        collapseStates: state.collapseStates    
     }
 }
 

@@ -4,7 +4,7 @@ import moment from 'moment'
 import Snackbar from 'material-ui/Snackbar';
 import TextField from 'material-ui/TextField';
 import Divider from 'material-ui/Divider';
-
+import UserAvatar from './UserAvatar'
 import {mergeComments} from '../actions'
 import { Silver,Carrot, BelizeHole,Clouds } from './colors'
 import CommentToolbar from './CommentToolbar'
@@ -76,6 +76,7 @@ class Comment extends Component {
 
     render() {
         const { comment } = this.props
+        const author = comment.authorData;
         const { editing,commMessage } = this.state;
         const open = commMessage.length>0;
         const content =this.modContent || comment.body || "";
@@ -97,7 +98,9 @@ class Comment extends Component {
         return (
             <div>
                 <div>
-                    <span style={{ color: BelizeHole }}>{comment.author}</span> wrote:
+                    <span style={{display:"flex",alignItems:"center"}}>
+                    <UserAvatar user={author} size={30}/> wrote:
+                    </span>
                     <br />
                     <span style={{ fontSize: ".8em" }}>
                         On <span style={{ color: Silver }}>{moment.unix(comment.timestamp).format("DD/MM/YYYY")}</span>

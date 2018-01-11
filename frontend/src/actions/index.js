@@ -12,6 +12,10 @@ export function mergeCategories(categories,add){
     return mergeAll({categories},add);
 }
 
+export function setCollapseState(category,state){
+    const collapseStates = {[category]:state}
+    return mergeAll({collapseStates});
+}
 
 export function mergePosts(posts,add){
     return mergeAll({posts},add);

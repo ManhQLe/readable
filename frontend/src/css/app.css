@@ -4,8 +4,6 @@ body{
 
 .app-body{
     padding-top:80px;    
-    margin-left: 10px;
-    margin-right: 10px;
     width:80%;
     padding-left: 10%;
     padding-right: 10%;
@@ -95,6 +93,24 @@ hr.dotted {
 
 .addPostFloatButton{
     position: fixed;
-    right:1%;
-    top:80px;
+    right:3%;
+    bottom:3%;
+}
+
+.expandButton{
+    cursor: pointer;
+    margin-right: .2em;
+    font-size: 1.7em;
+    transform-origin: 0% 50%;            
+    color:#8c8b8b;
+    transition: all 0.15s ease-in-out;
+}
+
+.expandButton:hover{
+    color:#d35400
+}
+
+.expandButton[data-collapsed='false']{
+    color:#d35400;
+    transform: rotate(45deg);
 }
