@@ -93,3 +93,8 @@ hr.dotted {
 	border-bottom: 1px dotted #fff;
 }
 
+.addPostFloatButton{
+    position: fixed;
+    right:1%;
+    top:80px;
+}

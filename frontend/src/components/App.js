@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
-
+import UserAvatar from './UserAvatar'
 import AppBar from './AppBar'
 import CategoryView from './Views/CategoryView'
 import DefaultView from './Views/DefaultView'
@@ -93,13 +93,18 @@ class App extends Component {
 		const { loginAccount } = this.props;
 		if (loginAccount) {
 
-			const bnt = <FloatingActionButton mini={true} secondary={true} onClick={this.onAddPost}>
+			const addPostBtn = <FloatingActionButton 
+				className="addPostFloatButton"
+				mini={true} secondary={true} onClick={this.onAddPost}>
 				<ContentAdd />
 			</FloatingActionButton>
 
 			return (
 				<div>
-					<AppBar floatButton={bnt} />
+					<AppBar floatButton={<UserAvatar user={loginAccount}/>} />
+					{
+						addPostBtn
+					}
 					<div className="app-body">
 
 						<Switch>
