@@ -99,6 +99,7 @@ function add (token, post) {
       title: post.title,
       body: post.body,
       author: post.author,
+      authorData: users.getUser(post.author),
       category: post.category,
       mediaType:post.mediaType,
       mediaUrl:post.mediaUrl,

@@ -70,6 +70,7 @@ function add (token, comment) {
       timestamp: Math.floor(Date.now()/1000),
       body: comment.body,
       author: comment.author,
+      authorData: users.getUser(comment.author),
       parentId: comment.parentId,
       voteScore: 0,
       deleted: false,
