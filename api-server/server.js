@@ -141,11 +141,11 @@ app.post('/login',bodyParser.json(),(req,res)=>{
                 return r.json()
             throw new Error("Invalid credentials");
         })
-        .then(u=>{   
-            console.log(u)        
+        .then(u=>{               
             const nu = users.addUser(un,{
                 avatarUrl: u.avatar_url,
-                name:u.name
+                name:u.name,
+                login:u.login
             })
             res.send(nu)
         })

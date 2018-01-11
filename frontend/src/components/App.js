@@ -45,10 +45,10 @@ class App extends Component {
 	}
 
 	dlgResponse = (act, data) => {
-		const { apiService, dispatch } = this.props;
+		const { apiService, dispatch, loginAccount } = this.props;
 		this.toggleDlg();
-		if (act === "SUBMIT")
-
+		if (act === "SUBMIT") {
+			data.author = loginAccount.login
 			apiService.createPost(data)
 				.then(post => {
 					dispatch(mergePosts([post]))
@@ -57,7 +57,7 @@ class App extends Component {
 				.catch(ex => {
 					console.log(ex)
 				});
-
+		}
 	}
 
 	onLogin = (type, un) => {
@@ -93,7 +93,7 @@ class App extends Component {
 		const { loginAccount } = this.props;
 		if (loginAccount) {
 
-			const addPostBtn = <FloatingActionButton 
+			const addPostBtn = <FloatingActionButton
 				className="addPostFloatButton"
 				mini={true} secondary={true} onClick={this.onAddPost}>
 				<ContentAdd />
@@ -101,7 +101,7 @@ class App extends Component {
 
 			return (
 				<div>
-					<AppBar floatButton={<UserAvatar user={loginAccount}/>} />
+					<AppBar floatButton={<UserAvatar user={loginAccount} />} />
 					{
 						addPostBtn
 					}

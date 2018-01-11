@@ -88,8 +88,8 @@ export default class CreatePost extends Component {
             <TextField id='body' multiLine={true}
             hintText="Give it some content :)"
             floatingLabelText="Post Content"
-            rows={5}
-            rowsMax = {8}
+            rows={2}
+            rowsMax = {3}
             underlineStyle={{borderColor:BelizeHole}}
             underlineFocusStyle={{borderColor:Carrot}}
             multiLine={true}

@@ -5,7 +5,8 @@ const users={
 const getDefaultUser=(un)=>{
     return {
         avatarUrl:config.origin +  "/public/avatar/Annonymous.png" ,
-        name:un 
+        name:un,
+        login:un 
     }
 }
 

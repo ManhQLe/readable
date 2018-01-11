@@ -108,7 +108,8 @@ class Post extends Component {
 
 
     render() {
-        const { post } = this.props;        
+        const { post } = this.props;     
+        const author = post.authorData;   
         const { editing,commMessage } = this.state;
         const open = commMessage.length>0;
 
@@ -140,9 +141,9 @@ class Post extends Component {
 
         return <div>
         <Card>       
-        <CardHeader title={post.author}
+        <CardHeader title={author.name}
                 subtitle={<span style={{ color: Abestos }}>{moment.unix(post.timestamp).format("dddd, MMMM Do YYYY")}</span>}
-                avatar={AppSettings.getUrl()+"/public/avatar/annonymous.png"}
+                avatar={author.avatarUrl}
                 /> 
             <CardMedia>
                 {post.mediaType === 'video' &&
