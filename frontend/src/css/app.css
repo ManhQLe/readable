@@ -63,3 +63,33 @@ a.post{
     transform: scale(0.8);
     transform-origin: 0 0
 }
+
+.loginCover{
+    position: fixed;    
+    left:0;
+    top:0;
+    right:0;
+    bottom:0;
+    display: flex;
+    justify-content:center;
+    align-items: center
+}
+
+.loginHeader{
+  
+    color:#f39c12;
+    font-weight: 200;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    text-align: center;
+
+}
+
+hr.dotted {
+    margin-top:.5em;
+    margin-bottom:.5em;
+    display: block;
+    border-top: 1px dotted #8c8b8b;    
+	border-bottom: 1px dotted #fff;
+}
+

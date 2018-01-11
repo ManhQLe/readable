@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import TextField from 'material-ui/TextField'
+import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton';
 import { Alizarin, SunFlower, Emerald, Silver } from './colors'
 import PropTypes from 'prop-types';
+
 
 import Icon from '../icons/github.svg'
 
@@ -11,6 +13,7 @@ export default class LoginPage extends Component {
         super(props)
         this.state = {
             login: "",
+            password:"",
             isEnabled:true,
             error:""
         }
@@ -30,10 +33,14 @@ export default class LoginPage extends Component {
     }
 
     render() {
-        const { login,isEnabled,error } = this.state;
+        const { login,isEnabled,error,password } = this.state;
+        const canLogin = login.length && password.length
+
         return (
-            <div style={{ textAlign: "center" }}>
-                <div style={{ width: 250,display:"inline-block" }}>
+            <div className="loginCover">
+                <Paper style={{ width: 300,display:"inline-block"}}>
+                    <h1 className="loginHeader">Login</h1>
+                    <div style={{padding:"0.5em"}}>
                     <TextField fullWidth={true}
                         disabled={!isEnabled}
                         underlineStyle={{ borderColor: Silver }}
@@ -43,17 +50,29 @@ export default class LoginPage extends Component {
                         onChange={(e) => this.setState({ login: e.target.value })}
 
                     />
+                    <TextField fullWidth={true}
+                        disabled={!isEnabled}
+                        underlineStyle={{ borderColor: Silver }}
+                        underlineFocusStyle={{ borderColor: Alizarin }}
+                        floatingLabelText="Password"
+                        hintText="Anything you want :)"
+                        value={password}
+                        onChange={(e) => this.setState({ password: e.target.value })}
+
+                    />
                     <br />
+                    <br/>
                     <RaisedButton
-                        style={{ width: 200 }} disabled={login.length === 0 || !isEnabled} backgroundColor="#00BCD4"
+                        style={{ width: 200 }} disabled={!canLogin} backgroundColor="#00BCD4"
                         fullWidth={true}
                         labelStyle={{ color: "white" }}
                         label="Login with GitHub"
                         icon={<img src={Icon} width={24} height={24} alt="github" />} 
                         onClick = {()=>this.login("GITHUB")}
                     />
-                    <div style={{ margin: 12 }}> OR </div>
-
+                    <br/>
+                    <hr className="dotted"/>
+                    
                     <RaisedButton backgroundColor="#00BCD4"
                         fullWidth={true}
                         disabled={!isEnabled}
@@ -64,7 +83,8 @@ export default class LoginPage extends Component {
                     <br/>
                     <br/>                    
                     <span style={{color:Alizarin}}>{error}</span>
-                </div>
+                    </div>
+                </Paper>
             </div>
         )
     }
