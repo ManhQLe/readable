@@ -21,7 +21,7 @@ const defaultData = {
   "8xf0y6ziyjabvozdxx66nd": {
     id: '8xf0y6ziyjabvozdxx66nd',
     timestamp: 1515638807 ,
-    title: 'Quantum Computing <bra|ket>',
+    title: 'Quantum Computing |101>',
     body: 'Quantum computing is computing using quantum-mechanical phenomena, such as superposition and entanglement.[1] A quantum computer is a device that performs quantum computing. They are different from binary digital electronic computers based on transistors. Whereas common digital computing requires that the data be encoded into binary digits (bits), each of which is always in one of two definite states (0 or 1), quantum computation uses quantum bits, which can be in superpositions of states. A quantum Turing machine is a theoretical model of such a computer, and is also known as the universal quantum computer. The field of quantum computing was initiated by the work of Paul Benioff (de)[2] and Yuri Manin in 1980,[3] Richard Feynman in 1982,[4] and David Deutsch in 1985.[5] A quantum computer with spins as quantum bits was also formulated for use as a quantum spacetime in 1968.',
     author: 'Manh Le',
     category: 'misc',

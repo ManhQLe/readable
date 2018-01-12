@@ -122,7 +122,7 @@ class Post extends Component {
                 underlineStyle={{borderColor:Clouds}}
                 underlineFocusStyle={{borderColor:SunFlower}}
                 onChange={this.onTitleChanged}
-                inputStyle={{color:Clouds}}/>
+                />
             contentBlock =<CardText><TextField id={post.id+'Body'} multiLine={true}
                 rows={5}
                 rowsMax = {8}
@@ -141,7 +141,7 @@ class Post extends Component {
 
         return <div>
         <Card>       
-        <CardHeader title={author.name}
+            <CardHeader title={author.name}
                 subtitle={<span style={{ color: Abestos }}>{moment.unix(post.timestamp).format("dddd, MMMM Do YYYY")}</span>}
                 avatar={author.avatarUrl}
                 /> 

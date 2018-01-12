@@ -41,7 +41,9 @@ class App extends Component {
 			apiService.createPost(data)
 				.then(post => {
 					dispatch(mergePosts([post]))
-					this.props.history.push(`${post.category}/${post.id}`);
+					
+					this.props.history.push(`/${data.category}/${post.id}`)
+				
 				})
 				.catch(ex => {
 					console.log(ex)

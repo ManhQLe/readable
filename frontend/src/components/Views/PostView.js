@@ -39,19 +39,24 @@ class PostView extends Component{
         })
     }
 
+    componentWillMount(){
+        const {posts,comments,match,apiService,dispatch} = this.props
+        const {postId} = match.params;
+        const post = posts.find(p=>p.id === postId)
+        
+        post && apiService.getPostComments(post.id)
+        .then(cms=>{
+            if(cms.length)
+                dispatch(mergeComments(cms))
+        })
+    }
+
     render(){
         const {posts,comments,match,apiService,dispatch} = this.props
         const {postId} = match.params;
         const post = posts.find(p=>p.id === postId)
         const {sortBy,asc} = this.state;
         
-        post && !comments.length && apiService.getPostComments(post.id)
-        .then(cms=>{
-            if(cms.length)
-                dispatch(mergeComments(cms))
-        })
-      
-
         if(post)
         {            
             const fcomments = comments.filter(c=>c.parentId === post.id)||[];
@@ -62,7 +67,7 @@ class PostView extends Component{
                 <Post post={post}/>
                 <ul className='grid'>
                     <li>
-                        <h1 className="h1-thin" style={{color:Turquoise}}>Comments</h1>
+                        <h1 className="h1-thin" style={{color:Turquoise}}>Comments ({fcomments.length})</h1>
                     </li>
                     <li style={{justifyContent:"flex-end"}}>
                         <SortToolbar sortCommands={commentSortCommands} sortBy={sortBy} asc={asc} onSortCommand={this.onSortCommand}/>
