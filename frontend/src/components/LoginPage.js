@@ -58,7 +58,7 @@ export default class LoginPage extends Component {
                         hintText="Anything you want :)"
                         value={password}
                         onChange={(e) => this.setState({ password: e.target.value })}
-
+                        type="password"
                     />
                     <br />
                     <br/>

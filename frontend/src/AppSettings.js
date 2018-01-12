@@ -4,7 +4,8 @@ const AppSettings = {
    TOKEN:9999999,
    getUrl(){
        return `${this.HOST}:${this.PORT}`
-   }
+   },
+   loginSessionKey:"loginAccount"
 }
 
 export default AppSettings;

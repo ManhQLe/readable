@@ -14,14 +14,15 @@ import PostView from './Views/PostView'
 import CreatePostDialog from './CreatePostDialog'
 import LoginPage from './LoginPage'
 import { mergePosts, mergeAll } from '../actions'
-
+import AppSettings from '../AppSettings'
 import '../css/app.css'
 
 class App extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			dlgOpen: false
+			dlgOpen: false,
+			resign:true
 		}
 	}	
 
@@ -51,18 +52,22 @@ class App extends Component {
 		}
 	}
 
-	onLogin = (type, un) => {
+	signIn = (type, un) => {
+
 		const LOGINFORM = this.refs.LOGINFORM;
 		LOGINFORM.setEnable(false);
 
 		const { apiService, dispatch } = this.props;
 		const isGit = type === "GITHUB";
+		
 		apiService.login(un, isGit)
 			.then(u => {
 				LOGINFORM.setEnable(true);
 				const ps = [apiService.getCategories(), apiService.getPosts(), Promise.resolve(u)]
-
+		
 				Promise.all(ps).then(([categories, posts, loginAccount]) => {
+					this.storeLoginAccount(loginAccount)
+
 					dispatch(mergeAll({ categories, posts, loginAccount }));
 
 				}).catch(x => {
@@ -79,9 +84,32 @@ class App extends Component {
 
 	}
 
+	storeLoginAccount(loginAccount){
+		sessionStorage.setItem(AppSettings.loginSessionKey,JSON.stringify(loginAccount))
+	}
+
+
+	componentDidMount(){
+		if(this.props.loginAccount)		
+			return;		
+		let login;
+
+		try
+		{
+			const login = JSON.parse(sessionStorage.getItem(AppSettings.loginSessionKey));
+			console.log(login)
+			if(login)			
+			{
+				this.signIn("RESIGN TRICK:)",login.login);
+			}
+		}
+		catch(ex){}
+	}
+
 	render() {
 		const { dlgOpen } = this.state;
-		const { loginAccount } = this.props;
+		const {loginAccount} = this.props;
+
 		if (loginAccount) {
 
 			const addPostBtn = <FloatingActionButton
@@ -110,7 +138,7 @@ class App extends Component {
 			);
 		}
 		else {
-			return <LoginPage ref="LOGINFORM" onLogin={this.onLogin} />
+			return <LoginPage ref="LOGINFORM" onLogin={this.signIn} />
 		}
 	}
 }
