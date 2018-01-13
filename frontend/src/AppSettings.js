@@ -3,7 +3,8 @@ const AppSettings = {
    HOST:"http://localhost",
    TOKEN:9999999,
    getUrl(){
-       return `${this.HOST}:${this.PORT}`
+       const port = this.PORT === 80? '':`:${this.PORT}`
+       return `${this.HOST}${port}`
    },
    loginSessionKey:"loginAccount"
 }
