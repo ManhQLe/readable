@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import TextField from 'material-ui/TextField'
 import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton';
-import { Alizarin, SunFlower, Emerald, Silver } from './colors'
+import { Alizarin,Silver } from './colors'
 import PropTypes from 'prop-types';
 
 
@@ -29,7 +29,7 @@ export default class LoginPage extends Component {
 
     login = (type)=>{
         const {onLogin} = this.props;
-        onLogin(type,type=="GITHUB"?this.state.login:type.toLocaleLowerCase());
+        onLogin(type,type==="GITHUB"?this.state.login:type.toLocaleLowerCase());
     }
 
     render() {

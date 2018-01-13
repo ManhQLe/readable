@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Pumpkin, Emerald, Carrot, Alizarin, Abestos, Silver } from './colors'
+import { Pumpkin, Emerald, Alizarin, Abestos } from './colors'
 import IconButton from 'material-ui/IconButton'
 import Thumbsup from 'material-ui/svg-icons/action/thumb-up'
 import Thumbsdown from 'material-ui/svg-icons/action/thumb-down'

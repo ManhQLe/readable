@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 import Snackbar from 'material-ui/Snackbar';
 import TextField from 'material-ui/TextField';
-import Divider from 'material-ui/Divider';
+
 import UserAvatar from './UserAvatar'
 import {mergeComments} from '../actions'
-import { Silver,Carrot, BelizeHole,Clouds } from './colors'
+import { Silver,Carrot, BelizeHole } from './colors'
 import CommentToolbar from './CommentToolbar'
 
 class Comment extends Component {
@@ -59,6 +59,9 @@ class Comment extends Component {
                 .then(c=>{                                        
                     dispatch(mergeComments([c],false))
                 })
+                break;
+            default:
+                break;
                 
         }
     }

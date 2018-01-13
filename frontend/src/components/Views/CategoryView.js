@@ -1,13 +1,12 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
-import Post from '../Post'
-import {Alizarin} from '../colors'
+
 import Category from '../Category';
 import Page404 from './Page404'
 
 class CategoryView extends Component{
     render(){
-        const {categories ,apiService,match}  = this.props;
+        const {categories,match}  = this.props;
         
         
         const cat = categories.find(c=>c.path === match.params.category);
@@ -29,8 +28,7 @@ class CategoryView extends Component{
 
 function mapStateToProps(state) {
     return {
-        categories: state.categories,
-        apiService: state.apiService
+        categories: state.categories
     }
 }
 

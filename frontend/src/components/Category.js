@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {Link,withRouter} from 'react-router-dom'
-import Paper from 'material-ui/Paper';
+import {Link} from 'react-router-dom'
 import Divider from 'material-ui/Divider';
 import Post from './Post'
 import SortToolbar from './SortToolbar'

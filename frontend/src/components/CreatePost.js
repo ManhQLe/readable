@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import {BelizeHole,Carrot, Turquoise, Silver} from './colors'
+import {BelizeHole,Carrot} from './colors'
 import TextField from 'material-ui/TextField'
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import FlatButton from 'material-ui/FlatButton'
 import Photo from 'material-ui/svg-icons/image/photo'
 import Video from 'material-ui/svg-icons/maps/local-movies'
 import PropTypes from 'prop-types'
@@ -74,9 +73,6 @@ export default class CreatePost extends Component {
         let x = categories.find(c=>(c.path===category || c.path===defCat));
         !x && categories.length && (x= categories[0]);
 
-        
-        const allowSubmit = body.length && title.length && category.length
-
         return <div>
             <TextField id='title' underlineStyle={{borderColor:BelizeHole}}
             underlineFocusStyle={{borderColor:Carrot}}
@@ -87,7 +83,7 @@ export default class CreatePost extends Component {
             onChange={this.titleChanged}
             />
             <br/>
-            <TextField id='body' multiLine={true}
+            <TextField id='body'
             hintText="Give it some content :)"
             floatingLabelText="Post Content"
             rows={2}

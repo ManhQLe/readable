@@ -4,7 +4,6 @@ import FontIcon from 'material-ui/FontIcon';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Alizarin, SunFlower, Emerald, Silver } from './colors'
 import PropTypes from 'prop-types';
-import edit from 'material-ui/svg-icons/image/edit';
 import DelConfirmation from './DelConfirmation'
 
 const RaisedButtonStyle = {

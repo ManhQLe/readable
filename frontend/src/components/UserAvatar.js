@@ -1,7 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Avatar from 'material-ui/Avatar';
-
-import { Alizarin, Carrot, SunFlower, Emerald, PeterRiver } from './colors'
 import PropTypes from 'prop-types'
 
 export default function UserAvatar(props){

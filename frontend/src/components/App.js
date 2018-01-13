@@ -91,13 +91,11 @@ class App extends Component {
 
 	componentDidMount(){
 		if(this.props.loginAccount)		
-			return;		
-		let login;
-
+			return;
+				
 		try
 		{
-			const login = JSON.parse(sessionStorage.getItem(AppSettings.loginSessionKey));
-			console.log(login)
+			const login = JSON.parse(sessionStorage.getItem(AppSettings.loginSessionKey));			
 			if(login)			
 			{
 				this.signIn("RESIGN TRICK:)",login.login);

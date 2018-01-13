@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {BelizeHole,Carrot, Turquoise, Silver} from './colors'
+import {BelizeHole,Carrot, Silver} from './colors'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
 import PropTypes from 'prop-types'
@@ -22,7 +22,7 @@ export default class CreateComment extends Component{
         const {onPost} = this.props;
         return (
         <div>            
-            <TextField id='body' multiLine={true}
+            <TextField id='body'
             hintText="We love your feedback because we have room for improvement :)"
             floatingLabelText="Comments"
             rows={3}
@@ -35,7 +35,13 @@ export default class CreateComment extends Component{
             onChange={this.contentChanged}
             />
             <div style={{textAlign:"right"}}>
-                <FlatButton disabled={body.length<=0} onClick={()=>{onPost(this.state.body), this.setState({body:''})}} label="Post" labelStyle={{ color:body.length>0? Carrot:Silver }} />
+                <FlatButton disabled={body.length<=0} 
+                onClick={()=>{
+                    onPost(this.state.body); 
+                    this.setState({body:''})
+                }} 
+                label="Post" 
+                labelStyle={{ color:body.length>0? Carrot:Silver }} />
             </div>
         </div>
         )

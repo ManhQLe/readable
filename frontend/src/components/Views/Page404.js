@@ -1,7 +1,7 @@
-import React,{Component} from 'react'
+import React from 'react'
 import HomeIcon from 'material-ui/svg-icons/action/home'
 import {Link} from 'react-router-dom'
-import {PeterRiver,SunFlower, Silver, Alizarin } from '../colors'
+import {PeterRiver, Silver, Alizarin } from '../colors'
 
 export default function Page404(){    
         return <div style={{textAlign:'center'}}>        

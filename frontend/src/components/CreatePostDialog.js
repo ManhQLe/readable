@@ -3,7 +3,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton'
 import PropTypes from 'prop-types'
 import CreatePost from './CreatePost'
-import { BelizeHole, Carrot, Turquoise, Silver } from './colors'
+import { Carrot, Turquoise, Silver } from './colors'
 
 export default class CreatePostDialog extends Component {
     constructor(props) {
@@ -27,7 +27,7 @@ export default class CreatePostDialog extends Component {
     }
 
     render() {
-        const { open, onAction,categories=[],category } = this.props;
+        const { open, categories=[],category } = this.props;
         const {allowSubmit} = this.state
 
         const actions = [

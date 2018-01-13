@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import MAppBar from 'material-ui/AppBar'
-import IconButton from 'material-ui/IconButton';
 import HomeIcon from 'material-ui/svg-icons/action/home'
 import ArrowRight from  'material-ui/svg-icons/hardware/keyboard-arrow-right'
-import { Orange } from './colors'
+
 
 const UrlPattern = require('url-pattern');
 
@@ -23,7 +22,6 @@ class AppBar extends Component {
         const {category, postId } = keys;
         const cat = categories.find(x=>x.path ===category)
         const hasPost = postId && postId.length;
-        let link;
 
         const breadCrums= [       
             <Link key="1" to="/">Readable&nbsp; <HomeIcon color="white"/></Link>

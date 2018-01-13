@@ -1,22 +1,18 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import Paper from 'material-ui/Paper';
-import Badge from 'material-ui/Badge';
-import IconButton from 'material-ui/IconButton'
+import PropTypes from 'prop-types'
+
 import Snackbar from 'material-ui/Snackbar';
-import FontIcon from 'material-ui/FontIcon';
-import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {Link} from 'react-router-dom'
 
-import AppSettings from '../AppSettings'
 import { connect } from 'react-redux'
 import EditToolbar from './EditToolbar'
 import { mergePosts } from '../actions'
-import PropTypes from 'prop-types'
 
 
-import {Clouds, Alizarin,Carrot, SunFlower,Abestos, Emerald, PeterRiver, Turquoise } from './colors'
+
+import {Clouds, Carrot, SunFlower,Abestos } from './colors'
 
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 
@@ -24,12 +20,6 @@ const cantLoadMedia=(e)=>{
     e.target.style.display='none'
 }
 
-function PostOrigin(props) {
-    const { post } = props;
-    return <div>
-        <span style={{ color: SunFlower }}>{moment.unix(post.timestamp).format("dddd, MMMM Do YYYY")}</span> by <span style={{ color: Emerald }}>{post.author}</span>
-    </div>
-}
 
 function htmlizedBody(body){
     return body.replace(/\n/g,"<br/>")
@@ -42,7 +32,7 @@ class Post extends Component {
             editing: false,
             commMessage: ""
         }
-        this.modContent= null,
+        this.modContent= null
         this.modTitle = null;
     }
 
@@ -98,7 +88,9 @@ class Post extends Component {
                 .then(p=>{                                        
                     dispatch(mergePosts([p],false))
                 })   
-                break;                       
+                break;    
+            default:
+                break;                   
         }
     }
     snackbarClosed = ()=>{
@@ -153,7 +145,7 @@ class Post extends Component {
                 }
                 {
                     post.mediaType === 'image' &&
-                    <img width="100%" src={post.mediaUrl} onError={cantLoadMedia} />
+                    <img width="100%" src={post.mediaUrl} alt="poster" onError={cantLoadMedia} />
                 }
             </CardMedia>
             <CardTitle title={titleBlock}/>

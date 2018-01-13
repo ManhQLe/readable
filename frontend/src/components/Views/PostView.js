@@ -1,17 +1,15 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
-import {BelizeHole, Turquoise} from '../colors'
-import Paper from 'material-ui/Paper'
-import CircularProgress from 'material-ui/CircularProgress';
-import Divider from 'material-ui/Divider'
 
+import Divider from 'material-ui/Divider'
 import {commentSortCommands} from '../../utils/sort'
 import SortToolbar from '../SortToolbar'
 import {mergeComments} from '../../actions'
 import Post from '../Post'
 import Comment from '../Comment'
-import Page404 from './Page404'
+
 import CreateComment from '../CreateComment'
+import {Turquoise} from '../colors'
 
 class PostView extends Component{
     constructor(props){
@@ -40,7 +38,7 @@ class PostView extends Component{
     }
 
     componentWillMount(){
-        const {posts,comments,match,apiService,dispatch} = this.props
+        const {posts,match,apiService,dispatch} = this.props
         const {postId} = match.params;
         const post = posts.find(p=>p.id === postId)
         
@@ -52,7 +50,7 @@ class PostView extends Component{
     }
 
     render(){
-        const {posts,comments,match,apiService,dispatch} = this.props
+        const {posts,comments,match} = this.props
         const {postId} = match.params;
         const post = posts.find(p=>p.id === postId)
         const {sortBy,asc} = this.state;
