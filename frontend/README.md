@@ -1,6 +1,6 @@
 # Launch
     * `npm install`
-    * `node server`
+    * `npm start`
 
 
 # Folder Listings
