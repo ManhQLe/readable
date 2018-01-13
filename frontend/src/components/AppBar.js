@@ -1,20 +1,19 @@
 import React, { Component } from 'react'
-import { Orange } from './colors'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+
 import MAppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton';
-import { Link } from 'react-router-dom'
-
 import HomeIcon from 'material-ui/svg-icons/action/home'
 import ArrowRight from  'material-ui/svg-icons/hardware/keyboard-arrow-right'
-
+import { Orange } from './colors'
 
 const UrlPattern = require('url-pattern');
 
-export default class AppBar extends Component {
-
+class AppBar extends Component {
 
     render() {
-        const { posts, comments,floatButton } = this.props;
+        const { floatButton,categories } = this.props;
         const pat = new UrlPattern("/:category/:postId");        
         const pat2 = new UrlPattern("/:category"); 
         const keys = pat.match(window.location.pathname)
@@ -22,6 +21,7 @@ export default class AppBar extends Component {
         || {}
         
         const {category, postId } = keys;
+        const cat = categories.find(x=>x.path ===category)
         const hasPost = postId && postId.length;
         let link;
 
@@ -32,7 +32,7 @@ export default class AppBar extends Component {
         hasPost && breadCrums.push(
             <a key="2"><ArrowRight color="white"/></a>,
             <Link key="3" to={'/'+ category}>
-                {category}
+                {cat?cat.name:category}
             </Link>            
         )        
 
@@ -46,3 +46,11 @@ export default class AppBar extends Component {
                 />
     }
 }
+
+function mapToProps(state){
+    return{
+        categories:state.categories
+    }
+}
+
+export default connect(mapToProps)(AppBar)

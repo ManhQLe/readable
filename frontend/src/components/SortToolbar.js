@@ -5,8 +5,6 @@ import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import { Alizarin, Carrot, SunFlower, Emerald, PeterRiver } from './colors'
 import SortIcon from 'material-ui/svg-icons/content/sort'
-
-
 import PropTypes from 'prop-types';
 
 

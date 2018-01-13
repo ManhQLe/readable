@@ -13,8 +13,7 @@ const styles = {
     smallIcon: {
         width: 17,
         height: 17,
-    },
-    iconHoverColor: "red"
+    }    
 }
 
 export default class CommentToobar extends Component {
@@ -23,7 +22,7 @@ export default class CommentToobar extends Component {
         super(props)
         this.state = {
             open: false
-        }
+        }        
     }
 
     handleConfimationAction=(act)=> {
@@ -86,6 +85,4 @@ export default class CommentToobar extends Component {
             </div>
         )
     }
-
-
 }

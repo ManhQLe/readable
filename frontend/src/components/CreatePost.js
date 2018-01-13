@@ -6,6 +6,8 @@ import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton'
 import Photo from 'material-ui/svg-icons/image/photo'
 import Video from 'material-ui/svg-icons/maps/local-movies'
+import PropTypes from 'prop-types'
+
 
 export default class CreatePost extends Component {
     constructor(props) {
@@ -129,4 +131,8 @@ export default class CreatePost extends Component {
           
         </div>
     }
+}
+
+CreatePost.propTypes = {
+    onDataChanged:PropTypes.func.isRequired
 }

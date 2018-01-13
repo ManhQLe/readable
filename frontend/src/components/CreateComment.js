@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import {BelizeHole,Carrot, Turquoise, Silver} from './colors'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
+import PropTypes from 'prop-types'
+
 
 export default class CreateComment extends Component{
     constructor(props){
@@ -40,4 +42,7 @@ export default class CreateComment extends Component{
     }
 }
 
+CreateComment.propTypes ={
+    onPost: PropTypes.func.isRequired
+}
 
