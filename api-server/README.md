@@ -43,7 +43,7 @@ The following endpoints are available:
 | `POST /comments/:id` | Used for voting on a comment. | **option** - [String]: Either `"upVote"` or `"downVote"`.  |
 | `PUT /comments/:id` | Edit the details of an existing comment. | **timestamp** - timestamp. Get this however you want. <br> **body** - [String] |
 | `DELETE /comments/:id` | Sets a comment's deleted flag to `true`. | &nbsp; |
-| `POST /login` | Login | {isGit, un} |
+| `POST /login`| Login with user   | **isGit**: Login with git <br> **un**: Username
 
 ### Post Banner References
 
