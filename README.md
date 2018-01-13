@@ -25,9 +25,6 @@ To get started developing right away:
 
 Information about the API server and how to use it can be found in its [README file](api-server/README.md).
 
-http://waterfire.us/f/learned_b.jpg
-http://quantumvalleyinvestments.com/wp-content/uploads/q-banner.png
-
 
 ## Frontend Server
 
