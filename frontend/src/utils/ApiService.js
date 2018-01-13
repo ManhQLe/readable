@@ -135,7 +135,8 @@ export default class ApiService {
 
     getOptions() {
         return {
-            headers: this.getHeaders()
+            headers: this.getHeaders(),
+            credentials: 'include'
         }
     }
 
