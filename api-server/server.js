@@ -217,7 +217,7 @@ app.get('/posts', (req, res) => {
 app.post('/posts', bodyParser.json(), (req, res) => {
     const postData = req.body
     if(!postData.mediaUrl || !postData.mediaUrl.length){
-        postData.mediaUrl =  req.protocol + '://' + req.hostname+ ":"+ config.port + "/public/"
+        postData.mediaUrl =  config.rootUrl + "/public/"
         + patterns[ Math.floor(patterns.length *Math.random()) + 1]
         postData.mediaType ='image'
     }
