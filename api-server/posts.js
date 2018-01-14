@@ -14,7 +14,7 @@ const defaultData = {
     category: 'misc',
     voteScore: 1,
     mediaType:"image",
-    mediaUrl:config.origin +"/public/learned_b.jpg",
+    mediaUrl:config.rootUrl+"/public/learned_b.jpg",
     deleted: false,
     commentCount: 0
   },
@@ -27,7 +27,7 @@ const defaultData = {
     category: 'misc',
     voteScore: 2,
     mediaType:"image",
-    mediaUrl:config.origin +"/public/q-banner.png",
+    mediaUrl:config.rootUrl+"/public/q-banner.png",
     deleted: false,
     commentCount: 0
   },
@@ -40,7 +40,7 @@ const defaultData = {
     category: 'react',
     voteScore: 6,
     mediaType:"image",
-    mediaUrl:config.origin +"/public/patt (3).jpg",
+    mediaUrl:config.rootUrl+"/public/patt (3).jpg",
     deleted: false,
     commentCount: 2
   },
@@ -52,7 +52,7 @@ const defaultData = {
     author: 'Le',
     category: 'redux',
     mediaType:"image",
-    mediaUrl:config.origin +"/public/patt (4).jpg",
+    mediaUrl:config.rootUrl+"/public/patt (4).jpg",
     voteScore: -5,
     deleted: false,
     commentCount: 0
@@ -65,7 +65,7 @@ const defaultData = {
     author: 'mle',
     category: 'redux',
     mediaType:"image",
-    mediaUrl:config.origin +"/public/patt (2).png",
+    mediaUrl:config.rootUrl+"/public/patt (2).png",
     voteScore: 2,
     deleted: false,
     commentCount: 0
