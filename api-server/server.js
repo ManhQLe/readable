@@ -2,7 +2,6 @@ require('dotenv').config()
 
 const express = require('express')
 const bodyParser = require('body-parser')
-const cors = require('cors')
 const config = require('./config')
 const categories = require('./categories')
 const posts = require('./posts')
@@ -15,8 +14,22 @@ const patterns = ["patt (1).jpg","patt (1).png","patt (2).jpg","patt (2).png"
 
 
 app.use('/public',express.static('public'))
-app.use(cors())
 
+var allowCrossDomain = function(req, res, next) {    
+    res.header('Access-Control-Allow-Credentials',true)
+    res.header('Access-Control-Allow-Origin',req.headers.origin);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+      
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+      res.sendStatus(204);
+    }
+    else {
+      next();
+    }
+};
+app.use(allowCrossDomain);
 
 
 app.get('/', (req, res) => {
@@ -156,7 +169,8 @@ app.post('/login',bodyParser.json(),(req,res)=>{
     }
     else
     {
-        res.send(users.addUser(un));
+        const root =  req.protocol + "//" + req.get('host')
+        res.send(users.addUser(un),null,root);
     }  
 })
 
