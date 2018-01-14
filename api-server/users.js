@@ -1,9 +1,9 @@
 const config = require('./config')
 
 const users = {}
-const getDefaultUser = (un,rootUrl) => {
+const getDefaultUser = (un) => {
     return {
-        avatarUrl: (rootUrl || config.origin) + "/public/avatar/Annonymous.png",
+        avatarUrl: config.rootUrl + "/public/avatar/Annonymous.png",
         name: un,
         login: un
     }
@@ -14,13 +14,13 @@ module.exports = {
         const user = users[username.toLocaleLowerCase()]
         return user ? user : getDefaultUser(username);
     },
-    addUser(username, data,rootUrl) {
+    addUser(username, data) {
         let user;
         if(data)
             users[username] = data;                
         user = users[username.toLocaleLowerCase()]
         
-        !user && (user = users[username.toLocaleLowerCase()] = getDefaultUser(username,rootUrl));
+        !user && (user = users[username.toLocaleLowerCase()] = getDefaultUser(username));
         
         return user
     },
