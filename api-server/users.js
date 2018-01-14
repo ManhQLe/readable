@@ -3,7 +3,7 @@ const config = require('./config')
 const users = {}
 const getDefaultUser = (un) => {
     return {
-        avatarUrl: config.rootUrl + "/public/avatar/Annonymous.png",
+        avatarUrl: config.rootUrl + "/public/avatar/annonymous.png",
         name: un,
         login: un
     }
