@@ -170,7 +170,7 @@ app.post('/login',bodyParser.json(),(req,res)=>{
     else
     {
         const root =  req.protocol + "//" + req.get('host')
-        res.send(users.addUser(un),null,root);
+        res.send(users.addUser(un,null,root));
     }  
 })
 
