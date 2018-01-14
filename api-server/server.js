@@ -13,7 +13,7 @@ const patterns = ["patt (1).jpg","patt (1).png","patt (2).jpg","patt (2).png"
     ,"patt (3).jpg","patt (4).jpg"]
 
 
-app.use('/public',express.static('public'))
+app.use('/public',express.static(path.join(__dirname, 'public')))
 
 var allowCrossDomain = function(req, res, next) {    
     res.header('Access-Control-Allow-Credentials',true)
