@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 
 import Divider from 'material-ui/Divider'
 import {commentSortCommands} from '../../utils/sort'
+import Page404 from './Page404'
 import SortToolbar from '../SortToolbar'
 import {mergeAll,mergeComments} from '../../actions'
 import Post from '../Post'
@@ -16,7 +17,8 @@ class PostView extends Component{
         super(props);
         this.state={
             sortBy:"BYDATE",
-            asc:false
+            asc:false,
+            isLoading:true
         }
     }
 
@@ -50,19 +52,28 @@ class PostView extends Component{
         const {postId} = match.params;
         const post = posts.find(p=>p.id === postId)
         
-        post && apiService.getPostComments(post.id)
-        .then(cms=>{
-            if(cms.length)
-                dispatch(mergeComments(cms))
-        })
+        if(!post)
+            this.setState({isLoading:false});
+        else
+            apiService.getPostComments(post.id)
+            .then(cms=>{
+                if(cms.length)
+                    dispatch(mergeComments(cms))
+                this.setState({isLoading:false})
+            })
     }
 
     render(){
         const {posts,comments,match} = this.props
         const {postId} = match.params;
         const post = posts.find(p=>p.id === postId)
-        const {sortBy,asc} = this.state;
+        const {sortBy,asc,isLoading} = this.state;
         
+        if(isLoading)
+        {
+            return <div>Please wait...</div>
+        }
+
         if(post)
         {            
             const fcomments = comments.filter(c=>c.parentId === post.id)||[];
@@ -95,7 +106,7 @@ class PostView extends Component{
 
         }
         else
-            return <div></div>
+            return <Page404/>
     }
 }
 
