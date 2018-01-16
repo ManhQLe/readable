@@ -5,7 +5,7 @@ import Snackbar from 'material-ui/Snackbar';
 import TextField from 'material-ui/TextField';
 
 import UserAvatar from './UserAvatar'
-import {mergeComments} from '../actions'
+import {mergeComments, mergePosts, mergeAll} from '../actions'
 import { Silver,Carrot, BelizeHole } from './colors'
 import CommentToolbar from './CommentToolbar'
 
@@ -56,7 +56,11 @@ class Comment extends Component {
                 break;
             case "DELETE":
                 apiService.delComment(comment.id)
-                .then(c=>{                                        
+                .then(c=>{
+                    apiService.getPost(comment.parentId)
+                    .then(p=>{
+                        dispatch(mergePosts([p]))    
+                    })
                     dispatch(mergeComments([c],false))
                 })
                 break;

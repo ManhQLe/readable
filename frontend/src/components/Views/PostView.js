@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import Divider from 'material-ui/Divider'
 import {commentSortCommands} from '../../utils/sort'
 import SortToolbar from '../SortToolbar'
-import {mergeComments} from '../../actions'
+import {mergeAll,mergeComments} from '../../actions'
 import Post from '../Post'
 import Comment from '../Comment'
 
@@ -30,7 +30,15 @@ class PostView extends Component{
 
         apiService.addComment(data)
         .then(comment=>{
-            dispatch(mergeComments([comment]));
+            apiService.getPost(match.params.postId)            
+            .then(p=>{
+                dispatch(mergeAll({
+                    "posts":[p],
+                    "comments":[comment]
+                }))
+                
+            })
+            
         })
         .catch(ex=>{
             console.log(ex)
