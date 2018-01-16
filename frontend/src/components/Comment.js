@@ -5,7 +5,7 @@ import Snackbar from 'material-ui/Snackbar';
 import TextField from 'material-ui/TextField';
 
 import UserAvatar from './UserAvatar'
-import {mergeComments, mergePosts, mergeAll} from '../actions'
+import {mergeComments, mergePosts} from '../actions'
 import { Silver,Carrot, BelizeHole } from './colors'
 import CommentToolbar from './CommentToolbar'
 
