@@ -126,7 +126,7 @@ class Post extends Component {
                 ref={i=>i&&i.focus()}
             /></CardText>
         }
-        else{
+        else{           
             titleBlock= <Link className="post" to={`/${post.category}/${post.id}`}>{post.title}</Link>
             contentBlock = <CardText dangerouslySetInnerHTML={{__html:htmlizedBody(post.body)}}></CardText>
         }
@@ -149,10 +149,9 @@ class Post extends Component {
                 }
             </CardMedia>
             <CardTitle title={titleBlock}/>
-            {contentBlock}
-
+            {contentBlock}            
             <CardActions>
-                <EditToolbar voteScore={post.voteScore} onAction={this.toolbarActed} editing={editing}/>
+                <EditToolbar commentCount={post.commentCount} voteScore={post.voteScore} onAction={this.toolbarActed} editing={editing}/>
             </CardActions>
         </Card>
         <Snackbar open={open} message={commMessage}

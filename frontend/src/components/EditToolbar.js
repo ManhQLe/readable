@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import IconButton from 'material-ui/IconButton'
 import FontIcon from 'material-ui/FontIcon';
+import Badge from 'material-ui/Badge';
+import CommentIcon from 'material-ui/svg-icons/communication/comment'
 import RaisedButton from 'material-ui/RaisedButton';
 import { Alizarin, SunFlower, Emerald, Silver } from './colors'
 import PropTypes from 'prop-types';
@@ -14,18 +16,19 @@ class EditToolbar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            open:false
+            open: false
         }
     }
 
     handleConfirmation = (act) => {
-        this.setState({open:false})
-        act==="OK" && this.props.onAction("DELETE");
+        this.setState({ open: false })
+        act === "OK" && this.props.onAction("DELETE");
     }
 
     render() {
         const {
             voteScore = 0,
+            commentCount = 0,
             editing = false,
             onAction = () => { }
         } = this.props;
@@ -40,6 +43,12 @@ class EditToolbar extends Component {
                 <IconButton tooltip="Down vote" onClick={() => onAction("THUMBSDOWN")}>
                     <FontIcon color={Alizarin} className='material-icons'>thumb_down</FontIcon>
                 </IconButton>
+            </li>
+            <li>
+                <Badge badgeContent={commentCount} primary={true}>
+                    <CommentIcon color={SunFlower} />
+                </Badge>
+                
             </li>
             <li style={{ justifyContent: "flex-end" }}>
                 {
@@ -57,10 +66,9 @@ class EditToolbar extends Component {
                 {
                     editing && <RaisedButton label="Cancel" onClick={() => onAction("CANCEL")} labelColor={SunFlower} />
                 }
-
                 <RaisedButton disabled={editing}
                     style={RaisedButtonStyle}
-                    onClick={() => this.setState({open:true})}
+                    onClick={() => this.setState({ open: true })}
                     label="Delete"
                     icon={<FontIcon style={{ color: (editing ? Silver : Alizarin) }} className='material-icons'>delete</FontIcon>}
                 />
@@ -74,7 +82,8 @@ class EditToolbar extends Component {
 EditToolbar.propTypes = {
     voteScore: PropTypes.number,
     editing: PropTypes.bool,
-    onAction: PropTypes.func
+    onAction: PropTypes.func,
+    commentCount: PropTypes.number
 }
 
 export default EditToolbar;
